@@ -1,0 +1,9 @@
+{
+  "items": [
+    {
+      "name": "Test Search",
+      "filterId": "test_search",
+      "acceptedTypes": "{\"sustenance\":[\"bar\",\"alpine_hut\"]}"
+    }
+  ]
+}

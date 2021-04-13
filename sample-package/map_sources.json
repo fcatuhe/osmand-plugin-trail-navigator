@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "sql": false,
+      "name": "OsmAnd (test)",
+      "minZoom": 1,
+      "maxZoom": 19,
+      "url": "https:\/\/tile.osmand.net\/hd\/{0}\/{1}\/{2}.png",
+      "ellipsoid": false,
+      "inverted_y": false,
+      "timesupported": false,
+      "expire": -1,
+      "inversiveZoom": false,
+      "ext": ".png",
+      "tileSize": 512,
+      "bitDensity": 8,
+      "avgSize": 18000
+    }
+  ]
+}

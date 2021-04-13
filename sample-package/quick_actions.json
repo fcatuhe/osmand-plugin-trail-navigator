@@ -1,0 +1,9 @@
+{
+  "items": [
+    {
+      "name": "Desert quick action",
+      "type": 12,
+      "params": "{\"dialog\":\"false\",\"message\":\"Message\"}"
+    }
+  ]
+}

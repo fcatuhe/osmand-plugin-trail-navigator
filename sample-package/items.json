@@ -1,0 +1,221 @@
+{
+   "version":1,
+   "items":[
+
+      {
+         "type":"PLUGIN",
+         "pluginId":"test.plugin",
+         "version" : 1,
+         "icon": {
+             "" : "@plugin-id.png"
+             
+         },
+         "image": {
+             "" :"@plugin-image.webp"
+         },
+         "name":{
+            "":"Test Plugin",
+            "ru":"Test Plugin: RU language"
+         },
+         "description":{
+            "":"This package is a test package and displays test information.",
+            "ru":"This package is a test package and displays test information. RU language."
+         }
+      },
+
+      {
+         "type":"RESOURCES",
+         "pluginId":"test.plugin",
+         "file":"res"
+      },
+
+
+      {
+         "type":"DOWNLOADS",
+         "pluginId":"test.plugin",
+         "items":[
+            {
+               "path":"test",
+               "name":{
+                  "":"My offline maps",
+                  "ru":"RU: My offline maps"
+               },
+               "icon":{
+                  "":"ic_world_globe_dark"
+               },
+               "header-color":"#002E64",
+               "description":{
+                  "text":{
+                     "":"This package is a collection of online and offline map sources of various types.",
+                     "ru":"RU: This package is a collection of online and offline map sources of various types of."
+                  },
+                  "button":[
+                     {
+                        "":"Telegram chat OsmAnd",
+                        "url":"https:\/\/t.me\/OsmAndMaps"
+                     }
+                  ]
+               }
+            },
+            {
+               "scope-id":"offline-maps",
+               "path":"test/Waterway",
+               "header-color":"#002E64",
+               "name":{
+                  "":"Waterway",
+                  "ru":"RU: waterway"
+               },
+               "icon":{
+                  "":"ic_world_globe_dark"
+               },
+               "items":[
+                  {
+                     "name":{
+                        "":"Offline Waterway map SA",
+                        "ru":"RU: Offline Waterway map SA"
+                     },
+                     "filename":"waterway.obf.zip",
+                     "type":"map",
+                     "timestamp":1582994500,
+                     "containerSize":28195301,
+                     "contentSize":28195301,
+                     "description":{
+                        "text":{
+                           "":"Zoom min: 0<br />Zoom max: 19<br />Countries: SA",
+                           "ru":"RU: Zoom min: 0<br />Zoom max: 19<br />Countries: SA"
+                        },
+                        "image":[
+                           "https://drive.google.com/uc?id=16HjUHsSWNgeQI0bmuup9ohpyrg6rWkHH&export=download"
+                        ]
+                     },
+                     "downloadurl":"https://drive.google.com/uc?id=10iP2VZexHtHC0QLhACZ1QoEy-duNN5Wg&export=download",
+                     "firstsubname":{
+                        "":"Waterway",
+                        "ru":"RU: Waterway"
+                     },
+                     "secondsubname":{
+                        "":"",
+                        "ru":""
+                     }
+                }
+           ]
+        }] 
+    },
+
+      {
+         "type":"PROFILE",
+         "pluginId":"test.plugin",
+         "file":"bicycle_test.json",
+         "appMode":{
+            "iconColor":"RED",
+            "iconName":"ic_action_motorcycle_dark",
+            "locIcon":"BENTLEY",
+            "navIcon":"BENTLEY",
+            "order":32,
+            "parent":"bicycle",
+            "stringKey":"bicycle_test",
+            "userProfileName" : "Test Prof"
+         },
+         "prefs" : {
+            "drawer_logo": { "" : "@logo.png"},
+            "drawer_url" : { "" : "https://osmand.net"},
+            "drawer_items" : { "hidden" : ["dashboard"], "order" : ["map_markers", "my_places", "search"] },
+            "context_menu_items" : {},
+            "configure_map_items" : {},
+            "route_service":"OSMAND",
+            "renderer":"test-rendering.render.xml",
+            "routing_profile":"routing-test.xml/test-car"
+        }
+      },
+
+      {
+         "type":"FILE",
+         "pluginId":"test.plugin",
+         "subtype" : "rendering_style",
+         "file":"\/rendering\/test-rendering.render.xml"
+      },
+
+      {
+         "type":"FILE",
+         "pluginId":"test.plugin",
+         "subtype" : "routing_config",
+         "file":"\/routing\/routing-test.xml"
+      },
+
+      {
+         "type":"SUGGESTED_DOWNLOADS",
+         "pluginId":"test.plugin",
+         "comment-1" : "search-type are latlon (closest by latlon), worldregion (by boundaries if name matches worldRegion downloadName as we do for default types), by default natural order, limit finds first N elements",
+         "comment-2" : "predefined scope-id are @type of indexes.xml map, srtm_map, road_map, wikimap, wikivoyage, hillshade, slope, fonts, voice, depth ",
+         "comment-3" : "names filters ignore case by name.contains(filterName)",
+         "items": [{
+             "scope-id" : "test-downloads",
+             "limit" : 1,
+             "search-type" : "latlon"
+         }, {
+             "scope-id" : "road_map",
+             "names" : [
+                 "Poland_lesser-poland_europe_2.obf.zip", "netherlands_noord-holland_europe"]
+         }, {
+             "scope-id" : "wikimap",
+             "search-type" : "worldregion"
+         }]
+      },
+
+      {
+         "type":"NAVIGATION_ICONS",
+         "pluginId":"test.plugin",
+         "items" : [{
+            "locationIcon": {
+                 "" : "@bentley-car.png"
+            },
+            "locationIconId": "BENTLEY", 
+            "navigationIcon": {
+                 "" : "@bentley-car-moving.png"
+            },
+            "navigationIconId": "BENTLEY"
+         }]
+      },
+      
+      {
+         "type":"QUICK_ACTIONS",
+         "pluginId":"test.plugin",
+         "items": [{
+            "name": "Test quick action",
+            "actionType": "osmbug.add",
+            "params": "{\"dialog\":\"false\",\"message\":\"Message\"}"
+          }]
+      },
+
+      {
+         "type":"POI_UI_FILTERS",
+         "pluginId":"test.plugin",
+          "items": [{
+                "name": "Test Search",
+                "filterId": "test_search",
+                "acceptedTypes": "{\"sustenance\":[\"bar\",\"alpine_hut\"]}"
+            }]
+      },
+
+      {
+         "type":"MAP_SOURCES",
+         "pluginId":"test.plugin",
+         "items": [{
+            "sql": false,
+            "name": "OsmAnd (test)",
+            "minZoom": 1,
+            "maxZoom": 19,
+            "url": "https:\/\/tile.osmand.net\/hd\/{0}\/{1}\/{2}.png",
+            "ellipsoid": false,
+            "inverted_y": false,
+            "timesupported": false,
+            "expire": -1,
+            "inversiveZoom": false,
+            "ext": ".png",
+            "tileSize": 512,
+            "bitDensity": 8,
+            "avgSize": 18000
+        }]
+      }
+   ]
+}
