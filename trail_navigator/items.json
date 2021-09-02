@@ -14,17 +14,71 @@
     },
     {
       "type": "FILE",
+      "pluginId": "trailnavigator.plugin",
       "subtype": "rendering_style",
       "file": "/rendering/trail_navigator.render.xml"
     },
     {
       "type": "FILE",
+      "pluginId": "trailnavigator.plugin",
       "subtype": "routing_config",
       "file": "/routing/trail_navigator.xml"
     },
     {
       "type": "MAP_SOURCES",
+      "pluginId": "trailnavigator.plugin",
       "file": "map_sources.json"
+    },
+    {
+      "type": "PROFILE",
+      "pluginId": "trailnavigator.plugin",
+      "file": "profile_motorcycle_trail.json",
+      "appMode": {
+        "iconColor": "GREEN",
+        "iconName": "ic_action_motorcycle_dark",
+        "locIcon": "CAR",
+        "navIcon": "DEFAULT",
+        "order": 6,
+        "parent": "motorcycle",
+        "routeService": "OSMAND",
+        "routingProfile": "trail_navigator.xml/Maxi-Trail",
+        "stringKey": "motorcycle_maxi_trail",
+        "userProfileName": "Maxi-Trail"
+      }
+    },
+    {
+      "type": "PROFILE",
+      "pluginId": "trailnavigator.plugin",
+      "file": "profile_motorcycle_trail.json",
+      "appMode": {
+        "iconColor": "BLUE",
+        "iconName": "ic_action_enduro_motorcycle",
+        "locIcon": "CAR",
+        "navIcon": "DEFAULT",
+        "order": 7,
+        "parent": "motorcycle",
+        "routeService": "OSMAND",
+        "routingProfile": "trail_navigator.xml/Trail",
+        "stringKey": "motorcycle_trail",
+        "userProfileName": "Trail"
+      }
+    },
+    {
+      "type": "PROFILE",
+      "pluginId": "trailnavigator.plugin",
+      "file": "profile_motorcycle_trail.json",
+      "appMode": {
+        "iconColor": "DARK_YELLOW",
+        "iconName": "ic_action_enduro_motorcycle",
+        "locIcon": "CAR",
+        "navIcon": "DEFAULT",
+        "order": 8,
+        "parent": "motorcycle",
+        "routeService": "OSMAND",
+        "routingProfile": "trail_navigator.xml/Enduro",
+        "stringKey": "motorcycle_enduro",
+        "userProfileName": "Enduro"
+      }
     }
   ]
 }

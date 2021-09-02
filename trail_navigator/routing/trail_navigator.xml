@@ -27,7 +27,7 @@
 	<attribute name="recalculateDistanceHelp" value="100000" />
 
 	<routingProfile
-    name="gros_trail"
+    name="Maxi-Trail"
     baseProfile="car"
     restrictionsAware="true"
     minSpeed="10"
@@ -505,7 +505,7 @@
 	<attribute name="recalculateDistanceHelp" value="100000" />
 
 	<routingProfile
-    name="petit_trail"
+    name="Trail"
     baseProfile="car"
     restrictionsAware="true"
     minSpeed="10"
@@ -873,7 +873,7 @@
 	<attribute name="recalculateDistanceHelp" value="100000" />
 
 	<routingProfile
-    name="enduro"
+    name="Enduro"
     baseProfile="car"
     restrictionsAware="true"
     minSpeed="10.0"

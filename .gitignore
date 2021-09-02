@@ -4,4 +4,6 @@
 yarn-debug.log*
 .yarn-integrity
 
+/binaries
+
 .DS_Store
