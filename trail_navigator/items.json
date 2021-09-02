@@ -32,7 +32,7 @@
     {
       "type": "PROFILE",
       "pluginId": "trailnavigator.plugin",
-      "file": "profile_motorcycle_trail.json",
+      "file": "profile_motorcycle_maxi_trail.json",
       "appMode": {
         "iconColor": "GREEN",
         "iconName": "ic_action_motorcycle_dark",
@@ -66,7 +66,7 @@
     {
       "type": "PROFILE",
       "pluginId": "trailnavigator.plugin",
-      "file": "profile_motorcycle_trail.json",
+      "file": "profile_motorcycle_enduro.json",
       "appMode": {
         "iconColor": "DARK_YELLOW",
         "iconName": "ic_action_enduro_motorcycle",

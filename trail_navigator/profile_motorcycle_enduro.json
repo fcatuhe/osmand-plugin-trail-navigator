@@ -140,7 +140,7 @@
   "context_menu_items": "{\"hidden\":[],\"order\":[],\"main\":[]}",
   "voice_provider": "en-tts",
   "renderer": "Trail navigator",
-  "nrenderer_appMode": "motorcycle_trail",
+  "nrenderer_appMode": "motorcycle_enduro",
   "nrenderer_defAppMode": "",
   "routing_recalc_distance": "0.0",
   "routing_straight_angle": "30.0",
