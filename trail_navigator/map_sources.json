@@ -1,0 +1,21 @@
+{
+  "items": [
+    {
+      "sql": false,
+      "name": "Microsoft Earth",
+      "minZoom": 1,
+      "maxZoom": 19,
+      "url": "http:\/\/a0.ortho.tiles.virtualearth.net\/tiles\/a{q}.jpg?g=45",
+      "ellipsoid": false,
+      "inverted_y": false,
+      "timesupported": false,
+      "expire": -1,
+      "inversiveZoom": false,
+      "ext": ".jpg",
+      "tileSize": 256,
+      "bitDensity": 32,
+      "avgSize": 18000,
+      "rule": "template:1"
+    }
+  ]
+}

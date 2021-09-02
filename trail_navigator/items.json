@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "type": "PLUGIN",
+      "pluginId": "trailNavigator.plugin",
+      "version": 1,
+      "name": {
+        "": "Trail Navigator"
+      },
+      "description": {
+        "": "Map style and navigation for Trail off-road practice"
+      }
+    },
+
+    {
+      "type": "FILE",
+      "file": "/rendering/trail.render.xml",
+      "subtype": "rendering_style"
+    },
+
+    {
+      "type": "FILE",
+      "file": "/routing/maxi_trail.xml",
+      "subtype": "routing_config"
+    },
+    {
+      "type": "FILE",
+      "file": "/routing/trail.xml",
+      "subtype": "routing_config"
+    },
+    {
+      "type": "FILE",
+      "file": "/routing/enduro.xml",
+      "subtype": "routing_config"
+    },
+
+    {
+      "type": "MAP_SOURCES",
+      "file": "map_sources.json"
+    }
+  ]
+}
