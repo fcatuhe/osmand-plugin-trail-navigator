@@ -8,4 +8,4 @@ Ce plugin Osmand facilite l'installation du style de carte et des profils de nav
 
 #### Installation
 
-L'installation est documentée dans le wiki, à la rubrique [Installation](/fcatuhe/osmand-plugin-trail-navigator/wiki/Installation).
+L'installation est documentée dans le wiki, à la rubrique [Installation](https://github.com/fcatuhe/osmand-plugin-trail-navigator/wiki/Installation).
