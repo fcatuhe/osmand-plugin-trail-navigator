@@ -95,6 +95,6 @@
       "measure_distance",
       "avoid_road"
     ],
-    "main": ["marker", "add", "share", "more"]
+    "main": ["add", "marker", "share", "more"]
   }
 }
