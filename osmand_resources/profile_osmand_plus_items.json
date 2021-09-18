@@ -1,29 +1,5 @@
 {
-  "map_info_controls": "
-    -compass;
-    next_turn;
-    -next_turn_small;
-    next_next_turn;
-    parking;
-    intermediate_distance;
-    intermediate_time;
-    distance;
-    time;
-    -map_marker_1st;
-    -bearing;
-    -map_marker_2nd;
-    -mapillary;
-    speed;
-    max_speed;
-    -altitude;
-    -gps_info;
-    monitoring;
-    audionotes;
-    -plain_time;
-    -battery;
-    -ruler;
-    -fps;
-  ",
+  "map_info_controls": "-compass;next_turn;-next_turn_small;next_next_turn;parking;intermediate_distance;intermediate_time;distance;time;-map_marker_1st;-bearing;-map_marker_2nd;-mapillary;speed;max_speed;-altitude;-gps_info;monitoring;audionotes;-plain_time;-battery;-ruler;-fps;",
   "drawer_items": {
     "hidden": [
       "dashboard",
