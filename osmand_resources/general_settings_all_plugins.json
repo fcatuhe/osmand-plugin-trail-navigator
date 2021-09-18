@@ -16,7 +16,7 @@
   "show_card_to_choose_drawer": "false",
   "should_show_dashboard_on_start": "false",
   "show_dashboard_on_map_screen": "false",
-  "available_application_modes": "default,default,car,bicycle,pedestrian,public_transport,boat,ski,",
+  "available_application_modes": "default,default,car,bicycle,pedestrian,truck,motorcycle,public_transport,boat,aircraft,ski,",
   "use_last_application_mode_by_default": "false",
   "last_used_application_mode": "default",
   "default_application_mode_string": "default",
