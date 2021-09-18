@@ -153,11 +153,11 @@
     ],
     "order": [
       "dashboard",
+      "tracks",
+      "measure_distance",
       "map_markers",
       "my_places",
       "favorites",
-      "tracks",
-      "measure_distance",
       "trip_recording",
       "av_notes",
       "search",
@@ -177,6 +177,7 @@
   },
   "configure_map_items": {
     "hidden": [
+      "show.map_source",
       "show.underlay_map",
       "show.recording_layer",
       "show.transport",
@@ -191,7 +192,8 @@
       "rendering.routesalpineHiking",
       "rendering.routespisteRoutes",
       "rendering.routeshorseRoutes",
-      "rendering.routeswhiteWaterSports"
+      "rendering.routeswhiteWaterSports",
+      "rendering.map_style"
     ],
     "order": [
       "show.category",
