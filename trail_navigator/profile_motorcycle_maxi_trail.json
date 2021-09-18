@@ -91,7 +91,7 @@
   "show_osm_edits": "true",
   "show_closed_osm_bugs": "false",
   "show_osm_bugs_min_zoom": "8",
-  "map_info_controls": "-compass;intermediate_distance;distance;-map_marker_1st;-bearing;-map_marker_2nd;speed;-gps_info;-plain_time;-battery;-ruler;-intermediate_time;-time;-max_speed;altitude;monitoring;next_turn_small;-next_next_turn;-next_turn;",
+  "map_info_controls": "-compass;-next_turn;next_turn_small;-next_next_turn;-parking;intermediate_distance;-intermediate_time;distance;-time;-map_marker_1st;-bearing;-map_marker_2nd;-mapillary;speed;-max_speed;altitude;-gps_info;monitoring;audionotes;-plain_time;-battery;-ruler;-fps;",
   "show_favorites": "true",
   "show_zoom_buttons_navigation": "false",
   "map_screen_orientation": "-1",
