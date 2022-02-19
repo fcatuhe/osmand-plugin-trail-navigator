@@ -233,7 +233,7 @@
     ]
   },
   "context_menu_items": { "hidden": [], "order": [], "main": [] },
-  "voice_provider": "en-tts",
+  "voice_provider": "fr-tts",
   "renderer": "Trail navigator",
   "nrenderer_appMode": "motorcycle_enduro",
   "nrenderer_defAppMode": "",
