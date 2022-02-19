@@ -34,8 +34,8 @@
 		<!-- next line should should make background transparent for underlays to be visible, but this curretnly does not work as desired -->
 		<!-- To change default color completely you should do that also for tag="place" value="island" and tag="natural" value="land" (search this file) -->
 		<case noPolygons="true" attrColorValue="#00000000"/>
-		<case nightMode="true" attrColorValue="#222222"/><!-- 222222 -->
-		<case attrColorValue="#FFFcEc"/>
+		<case nightMode="true" attrColorValue="#222222"/>
+		<case attrColorValue="#fff6e6"/><!-- fff6e6 dce6d0-->
 	</renderingAttribute>
 	<renderingAttribute name="rulerCircle">
 		<case color="#222222" strokeWidth="1:1" shadowRadius="1:1" shadowColor="#44f1eae4" strokeWidth_2="" color_2="#000000" strokeWidth_3="2:1" color_3="#99f1eae4"/>
@@ -104,8 +104,8 @@
 	<!-- color_2 used for route direction arrows -->
 	<!-- color_3 used for turn arrows on the route -->
 	<renderingAttribute name="route" >
-		<case color_0="#00000000" strokeWidth_0="0" color="#33ff00ff" strokeWidth="5" pathEffect="1_40" cap="ROUND" color_2="#990099" strokeWidth_2="10" color_3="#990099" strokeWidth_3="12">
-			<apply_if nightMode="true" color_2="#00ffff" color_3="#00ffff"/>
+		<case color_0="#00000000" strokeWidth_0="12" color="#336600ff" strokeWidth="12" color_2="#00990099" strokeWidth_2="12" color_3="#999900ff" strokeWidth_3="8">
+			<apply_if nightMode="true" color="#4400ffff" color_2="#0000ffff" color_3="#00ffff"/>
 		</case>
 	</renderingAttribute>
 
@@ -404,19 +404,43 @@
 
 	</renderingAttribute>
 
-
+	<!-- input layer check tag, value, point, cycle, area -->
+	<!-- Order should be between 0 and 255 (integer) -->
+	<!-- output ! objectType point = 1, line = 2, polygon = 3 and order -->
 	<order>
 		<!-- Point -->
 		<switch>
 			<switch area="false" point="true" objectType="1" order="128">
 				<!-- point has order 128 -->
 				<case tag="" value=""/>
-				<!---->
-				<case tag="place" value="city" order="250"/>
+				<!--
+				<case tag="place" value="city" order="245"/>
 				<case tag="place" value="town" order="240"/>
 				<case tag="place" value="village" order="230"/>
 				<case tag="place" value="hamlet" order="220"/>
 				<case tag="natural" value=""/>
+				<case tag="waterway" value="lock_gate"/>
+				<case tag="abandoned:place" value=""/>
+				<case tag="osmand" value="file_waypoint"/>
+				<case tag="osmand" value="fav"/>
+				<case tag="highway" value="via_ferrata"/>
+				<case tag="tourism" value="attraction"/>
+				<case tag="ford" value="yes"/>
+				<case tag="ford" value="stepping_stones"/>
+				<case tag="waterway" value="waterfall"/>
+				<case tag="waterway" value="rapids"/>
+				<case tag="aerialway" value=""/>
+				<case tag="aeroway" value=""/>
+				<case tag="geological" value="outcrop"/>
+				<case tag="railway" value="level_crossing"/>
+				-->
+				<case tag="natural" value="mountain_area" />
+				<case tag="natural" value="mountain_range" />
+				<case tag="natural" value="gorge" />
+				<case tag="natural" value="valley" />
+				<case tag="abandoned:railway" value="station"/>
+				<case tag="abandoned:aeroway" value=""/>
+				<case tag="region:type" value="mountain_area" />
 				<case tag="natural" value="volcano">
 					<apply_if maxzoom="12" additional="volcano:type=mud" order="-1"/>
 				</case>
@@ -424,34 +448,18 @@
 					<apply_if additional="ele_limit=200" maxzoom="12" order="-1"/>
 					<apply_if additional="ele_limit=500" maxzoom="11" order="-1"/>
 				</case>
-				<case tag="waterway" value="lock_gate"/>
-				<case tag="abandoned:place" value=""/>
-				<case tag="osmand" value="file_waypoint"/>
-				<case tag="osmand" value="fav"/>
-				<case tag="highway" value="via_ferrata"/>
 				<case tag="barrier" value="">
 					<apply_if lessDetailed="true" maxzoom="14" order="-1"/>
 				</case>
-				<case tag="tourism" value="attraction"/>
 				<case maxzoom="18" tag="historic" value="memorial">
 					<apply_if additional="memorial=stolperstein" order="-1"/>
 					<apply_if additional="memorial=plaque" order="-1"/>
 				</case>
-				<case tag="ford" value="yes"/>
-				<case tag="ford" value="stepping_stones"/>
-				<case tag="waterway" value="waterfall"/>
-				<case tag="waterway" value="rapids"/>
 				<case tag="aerialway" value="station" ignorePolygonAsPointArea="true"/>
-				<case tag="aerialway" value=""/>
-				<case tag="aeroway" value=""/>
-				<case tag="region:type" value="mountain_area"/>
-				<case tag="geological" value="outcrop"/>
-				<case tag="abandoned:aeroway" value=""/>
 				<case tag="railway" value="station" ignorePolygonAsPointArea="true">
 					<apply_if additional="station=subway" order="-1"/>
 				</case>
 				<case tag="railway" value="yard" ignorePolygonAsPointArea="true"/>
-				<case tag="railway" value="level_crossing"/>
 				<switch>
 					<case tag="railway" value="halt" ignorePolygonAsPointArea="true"/>
 					<case tag="railway" value="tram_stop" ignorePolygonAsPointArea="true"/>
@@ -462,17 +470,26 @@
 					<apply_if layer="-1" order="-1"/>
 				</switch>
 
-				<case tag="abandoned:railway" value="station"/>
 			</switch>
 
 		<!-- Polygon -->
-			<switch area="true" point="false" addPoint="true" objectType="3" order="5"><!---->
+			<switch point="false" addPoint="true" objectType="3" order="5">
+
+				<case tag="amenity" value="parking" order="9"/>
+				<case tag="leisure" value="park"/>
+				<case tag="leisure" value="resort" order="8"/>
 				<case tag="leisure" value="nature_reserve" order="12" />
+				<case tag="leisure" value="track" order="10" />
+
 				<case tag="boundary" value="national_park" order="-1" ignorePolygonArea="true"/>
 				<case tag="boundary" value="protected_area" order="1" ignorePolygonArea="true"/>
+				<case tag="boundary" value="forestry_compartment" order="9"/>
+
 				<case tag="place" value="region" order="1" ignorePolygonArea="true"/>
 				<case tag="place" value="island" order="1"/>
 				<case tag="place" value="islet" order="1"/>
+				<case tag="place" value="locality" order="11" ignorePolygonAsPointArea="true"/>
+
 				<switch layer="-1" order="3">
 					<case tag="natural" value="coastline"/>
 					<case tag="natural" value="land"/>
@@ -480,12 +497,17 @@
 					<case tag="place" value="islet"/>
 					<case tag="" value=""/>
 				</switch>
-				<case tag="barrier" value="" order="20"/>
+
+				<case tag="barrier" value="" order="20"/><!--
 				<case tag="barrier" value="city_wall" order="20"/>
 				<case tag="barrier" value="castle_wall" order="20"/>
-				<case tag="barrier" value="hedge" order="20"/>
+				<case tag="barrier" value="hedge" order="20"/>-->
+				<case tag="barrier" value="wall" />
+
+				<case tag="amenity" value="shelter" order="20"/>
+
 				<case tag="man_made" value="reinforced_slope"/>
-				<case tag="barrier" value="wall" order="20"/>
+
 				<switch>
 					<case tag="public_transport" value="platform"/>
 					<case tag="railway" value="halt"/>
@@ -494,8 +516,7 @@
 					<case tag="railway" value="yard" ignorePolygonArea="true"/>
 					<apply_if layer="-1" order="-1"/>
 				</switch>
-			</switch>
-			<switch cycle="true" point="false" addPoint="true" objectType="3" order="5">
+
 				<switch>
 					<case tag="area:highway" value="motorway"/>
 					<case tag="area:highway" value="trunk"/>
@@ -507,7 +528,6 @@
 					<case tag="area:highway" value="road"/>
 					<case tag="area:highway" value="unclassified"/>
 					<case tag="area:highway" value="service"/>
-	<!--				<case tag="highway" value="rest_area"/>-->
 					<case tag="area:highway" value="residential"/>
 					<case tag="area:highway" value="footway"/>
 					<case tag="area:highway" value="track"/>
@@ -518,60 +538,73 @@
 					<case tag="waterway" value="weir"/>
 					<apply order="10"/>
 				</switch>
+
 				<case tag="natural" value="volcano">
 					<apply_if maxzoom="12" additional="volcano:type=mud" order="-1"/>
 				</case>
+				<!--interdit le texte on path !
+				<case tag="region:type" value="mountain_area" ignorePolygonArea="true"/>
+				<case tag="natural" value="valley" ignorePolygonArea="true"/>
+				<case tag="natural" value="gorge" ignorePolygonArea="true"/>
+				<case tag="natural" value="mountain_area" ignorePolygonArea="true"/>
+				<case tag="natural" value="mountain_range" ignorePolygonArea="true"/>-->
 				<case tag="natural" value="water" order="9"/>
-				<case tag="waterway" value="dock"/>
-				<case tag="landuse" value="reservoir" order="9"/>
-				<case tag="waterway" value="riverbank" order="9"/>
-				<case tag="natural" value="wetland" order="7"/>
-				<case tag="natural" value="scrub" order="7"/>
-				<case tag="natural" value="wood" order="7"/>
-				<case tag="landuse" value="forest" order="7"/>
-				<case tag="wood:lost" value="" order="7"/>
-				<case tag="natural" value="crater"/>
-				<case tag="natural" value="crevasse">
-					<apply_if lessDetailed="true" maxzoom="15" order="-1"/>
-				</case>
-				<case tag="glacial" value="crevasse_zone" order="10"/>
-				<case tag="natural" value="stone"/>
-
 				<case tag="natural" value="sinkhole"/>
 				<case tag="natural" value="hot_spring"/>
 				<case tag="natural" value="geyser"/>
-				<case tag="leisure" value="park"/>
-				<case tag="leisure" value="resort" order="8"/>
+				<case tag="natural" value="crater"/>
+				<case tag="natural" value="wetland" order="7"/>
+				<case tag="natural" value="scrub" order="7"/>
+				<case tag="natural" value="wood" order="7"/>
+				<case tag="natural" value="stone"/>
+				<case tag="natural" value="crevasse">
+					<apply_if lessDetailed="true" maxzoom="15" order="-1"/>
+				</case>
+
+				<case tag="landuse" value="residential" order="10"/>
+				<case tag="landuse" value="farmyard" order="8"/>
+				<case tag="landuse" value="farmland" order="8"/>
+				<case tag="landuse" value="vineyard" order="9"/>
+				<case tag="landuse" value="forest" order="7"/>
+				<case tag="wood:lost" value="" order="7"/>
+				<case tag="landuse" value="greenfield" order="8"/>
+				<case tag="landuse" value="brownfield" order="8"/>
+				<case tag="landuse" value="reservoir" order="9"/>
+				<case tag="landuse" value="military" order="9"/>
+				<case tag="landuse" value="cemetery" order="10"/>
+				<case tag="landuse" value="construction" order="11"/>
+				<case tag="landuse" value="quarry" order="10"/>
+				<case tag="glacial" value="crevasse_zone" order="10"/>
+
+				<case tag="waterway" value="dock"/>
+				<case tag="waterway" value="riverbank" order="9"/>
+
+				<case tag="military" value="bunker"/>
+				<case tag="military" value="barracks"/>
+
 				<case tag="sport" value="climbing" order="9"/>
-				<case tag="landuse" value="greenfield" order="7"/>
-				<case tag="landuse" value="brownfield" order="7"/>
-				<case tag="boundary" value="forestry_compartment" order="9"/>
-				<case tag="building" value="no" order="-1"/>
+
 				<case tag="man_made" value="storage_tank"/>
 				<case tag="man_made" value="silo"/>
 				<case tag="man_made" value="bunker_silo"/>
 				<case tag="man_made" value="spoil_heap"/>
 				<case tag="man_made" value="reservoir_covered"/>
-				<case tag="military" value="bunker"/>
-				<case tag="military" value="barracks"/>
 				<case tag="man_made" value="chimney"/>
 				<case tag="man_made" value="tower"/>
 				<case tag="man_made" value="monitoring_station"/>
 				<case tag="man_made" value="reinforced_slope"/>
+
+				<case tag="building" value="no" order="-1"/>
 				<case tag="building" value="" order="10"/>
+				<case tag="building" value="proposed" order="-1"/>
 				<case tag="abandoned:building" value="no" order="-1"/>
 				<case tag="abandoned:building" value="" order="10"/>
 				<case tag="disused:building" value="no" order="-1"/>
 				<case tag="disused:building" value="" order="10"/>
-				<case tag="building" value="proposed" order="-1"/>
+
 				<case tag="public_transport" value="platform" order="9" ignorePolygonAsPointArea="true"/>
 				<case tag="tourism" value="attraction" order="11" ignorePolygonAsPointArea="true"/>
-				<case tag="place" value="locality" order="11" ignorePolygonAsPointArea="true"/>
 				<case tag="amenity" value="place_of_worship" ignorePolygonAsPointArea="true"/>
-				<case tag="landuse" value="cemetery" order="10"/>
-				<case tag="landuse" value="construction" order="10"/>
-				<case tag="landuse" value="quarry" order="10"/>
-				<case tag="landuse" value="military" order="9"/>
 				<case tag="military" value="danger_area" order="9"/>
 				<case tag="historic" value="archaeological_site" order="9"/>
 				<case tag="geological" value="palaeontological_site" order="9"/>
@@ -597,182 +630,185 @@
 		<!-- Line -->
 			<switch area="false" addPoint="true" objectType="3" order="80">
 				<case tag="boundary" value="national_park" order="0"/><!--OK -->
-				<case tag="leisure" value="nature_reserve" order="81" /> <!--OK -->
-				<case tag="region:type" value="mountain_area" ignorePolygonArea="true"/><!--NOK -->
+				<case tag="leisure" value="nature_reserve" order="81" /> <!--OK --><!--
+				<case tag="region:type" value="mountain_area" ignorePolygonArea="true"/>OK pour ligne-->
 				<case tag="place" value="region" ignorePolygonArea="true"/><!--NOK -->
+			</switch>
+
+			<switch area="false" addPoint="false" objectType="2" >
+				<case tag="natural" value="mountain_range" order="250"/>
+				<case tag="natural" value="valley" order="245"/>  <!--non-->
+				<case tag="natural" value="gorge" order="255"/>  <!--oui-->
+				<case tag="region:type" value="mountain_area" order="255"/>
 			</switch>
 
 			<switch area="false" addPoint="true" objectType="2" order="80">
 				<!-- default line -->
-				<case layer="-1" tag="" value="" order="11"/>
 				<case tag="" value="" order="12"/>
-				<case tag="boundary" value="protected_area" order="79"/>
+				<case layer="-1" tag="" value="" order="11"/>
+				<case tag="leisure" value="track" order="60" ignorePolygonArea="true"/>
 				<case tag="leisure" value="nature_reserve" order="80" /><!-- OK -->
-				<case tag="natural" value="coastline_broken" order="63"/>
-				<case tag="natural" value="coastline_line" order="63"/>
 				<case tag="osmand" value="file_trackline"/>
 				<case tag="osmand" value="file_routeline"/>
 				<case tag="admin_level" value="" order="62"/>
 				<case tag="power" value="line" order="96"/>
 				<case tag="power" value="minor_line" order="96"/>
-				<switch>
-					<case tag="highway" value="motorway" order="84">
-						<apply_if layer="1" order="107"/>
-						<apply_if additional="layer=2" order="137"/>
-						<apply_if additional="layer=3" order="165"/>
-						<apply_if layer="-1" order="62"/>
-						<apply_if additional="layer=-2" order="41"/>
-					</case>
-					<case tag="highway" value="motorway_link" order="71">
-						<apply_if layer="1" order="94"/>
-						<apply_if additional="layer=2" order="124"/>
-						<apply_if additional="layer=3" order="152"/>
-						<apply_if layer="-1" order="49"/>
-						<apply_if additional="layer=-2" order="25"/>
-					</case>
-					<case tag="highway" value="trunk" order="83">
-						<apply_if layer="1" order="106"/>
-						<apply_if additional="layer=2" order="136"/>
-						<apply_if additional="layer=3" order="164"/>
-						<apply_if layer="-1" order="61"/>
-						<apply_if additional="layer=-2" order="40"/>
-					</case>
-					<case tag="highway" value="trunk_link" order="70">
-						<apply_if layer="1" order="93"/>
-						<apply_if additional="layer=2" order="123"/>
-						<apply_if additional="layer=3" order="151"/>
-						<apply_if layer="-1" order="48"/>
-						<apply_if additional="layer=-2" order="24"/>
-					</case>
-					<case tag="highway" value="primary" order="82">
-						<apply_if layer="1" order="105"/>
-						<apply_if additional="layer=2" order="135"/>
-						<apply_if additional="layer=3" order="163"/>
-						<apply_if layer="-1" order="60"/>
-						<apply_if additional="layer=-2" order="39"/>
-					</case>
-					<case tag="highway" value="primary_link" order="69">
-						<apply_if layer="1" order="92"/>
-						<apply_if additional="layer=2" order="122"/>
-						<apply_if additional="layer=3" order="150"/>
-						<apply_if layer="-1" order="47"/>
-						<apply_if additional="layer=-2" order="23"/>
-					</case>
-					<case tag="highway" value="secondary" order="81">
-						<apply_if layer="1" order="104"/>
-						<apply_if additional="layer=2" order="134"/>
-						<apply_if additional="layer=3" order="162"/>
-						<apply_if layer="-1" order="59"/>
-						<apply_if additional="layer=-2" order="38"/>
-					</case>
-					<case tag="highway" value="secondary_link" order="68">
-						<apply_if layer="1" order="91"/>
-						<apply_if additional="layer=2" order="121"/>
-						<apply_if additional="layer=3" order="149"/>
-						<apply_if layer="-1" order="46"/>
-						<apply_if additional="layer=-2" order="22"/>
-					</case>
-					<case tag="highway" value="tertiary" order="80">
-						<apply_if layer="1" order="103"/>
-						<apply_if additional="layer=2" order="133"/>
-						<apply_if additional="layer=3" order="161"/>
-						<apply_if layer="-1" order="58"/>
-						<apply_if additional="layer=-2" order="37"/>
-					</case>
-					<case tag="highway" value="tertiary_link" order="67">
-						<apply_if layer="1" order="90"/>
-						<apply_if additional="layer=2" order="120"/>
-						<apply_if additional="layer=3" order="148"/>
-						<apply_if layer="-1" order="45"/>
-						<apply_if additional="layer=-2" order="21"/>
-					</case>
-					<case tag="highway" value="road" order="79">
-						<apply_if layer="1" order="102"/>
-						<apply_if additional="layer=2" order="132"/>
-						<apply_if additional="layer=3" order="160"/>
-						<apply_if layer="-1" order="57"/>
-						<apply_if additional="layer=-2" order="36"/>
-					</case>
-					<case tag="highway" value="unclassified" order="79">
-						<apply_if layer="1" order="102"/>
-						<apply_if additional="layer=2" order="132"/>
-						<apply_if additional="layer=3" order="160"/>
-						<apply_if layer="-1" order="57"/>
-						<apply_if additional="layer=-2" order="36"/>
-					</case>
-					<case tag="highway" value="residential" order="78">
-						<apply_if layer="1" order="101"/>
-						<apply_if additional="layer=2" order="131"/>
-						<apply_if additional="layer=3" order="159"/>
-						<apply_if layer="-1" order="56"/>
-						<apply_if additional="layer=-2" order="35"/>
-					</case>
-					<case tag="highway" value="service" order="78">
-						<apply_if layer="1" order="101"/>
-						<apply_if additional="bridge=yes" order="120"/>
-						<apply_if additional="layer=2" order="131"/>
-						<apply_if additional="layer=3" order="159"/>
-						<apply_if layer="-1" order="56"/>
-						<apply_if additional="layer=-2" order="35"/>
-					</case>
-					<case tag="highway" value="living_street" order="77">
-						<apply_if layer="1" order="100"/>
-						<apply_if additional="layer=2" order="130"/>
-						<apply_if additional="layer=3" order="158"/>
-						<apply_if layer="-1" order="55"/>
-						<apply_if additional="layer=-2" order="34"/>
-					</case>
-					<case tag="highway" value="pedestrian" order="66">
-						<apply_if layer="1" order="99"/>
-						<apply_if additional="layer=2" order="129"/>
-						<apply_if additional="layer=3" order="157"/>
-						<apply_if layer="-1" order="54"/>
-						<apply_if additional="layer=-2" order="33"/>
-					</case>
-					<case tag="highway" value="escape" order="89">
-						<apply_if baseAppMode="car" order="168"/>
-					</case>
-					<case tag="highway" value="track" order="63">
-						<apply_if layer="1" order="111"/>
-						<apply_if additional="layer=2" order="139"/>
-						<apply_if additional="layer=3" order="146"/>
-						<apply_if layer="-1" order="20"/>
-						<apply_if additional="layer=-2" order="19"/>
-					</case>
-					<case tag="highway" value="path" order="62">
-						<apply_if layer="1" order="110"/>
-						<apply_if additional="layer=2" order="138"/>
-						<apply_if additional="layer=3" order="145"/>
-						<apply_if layer="-1" order="19"/>
-						<apply_if additional="layer=-2" order="18"/>
-					</case>
-					<case tag="highway" value="footway" order="61">
-						<apply_if layer="1" order="109"/>
-						<apply_if additional="layer=2" order="137"/>
-						<apply_if additional="layer=3" order="144"/>
-						<apply_if layer="-1" order="18"/>
-						<apply_if additional="layer=-2" order="17"/>
-					</case>
-					<case tag="highway" value="cycleway" order="60">
-						<apply_if layer="1" order="108"/>
-						<apply_if additional="layer=2" order="136"/>
-						<apply_if additional="layer=3" order="143"/>
-						<apply_if layer="-1" order="17"/>
-						<apply_if additional="layer=-2" order="16"/>
-					</case>
-					<case tag="highway" value="steps" order="65">
-						<apply_if layer="1" order="111"/>
-						<apply_if additional="layer=2" order="140"/>
-						<apply_if additional="layer=3" order="166"/>
-						<apply_if layer="-1" order="20"/>
-						<apply_if additional="layer=-2" order="19"/>
-					</case>
-					<case tag="abandoned:highway" value=""/>
-					<case tag="highway" value="via_ferrata"/>
-					<case tag="highway" value="raceway"/>
-					<apply_if maxzoom="13" additional="construction=yes" order="-1"/>
-				</switch>
-				<case tag="highway" value="bridleway" order="53"/>
+				<case tag="highway" value="motorway" order="84">
+					<apply_if layer="1" order="107"/>
+					<apply_if additional="layer=2" order="137"/>
+					<apply_if additional="layer=3" order="165"/>
+					<apply_if layer="-1" order="62"/>
+					<apply_if additional="layer=-2" order="41"/>
+				</case>
+				<case tag="highway" value="motorway_link" order="71">
+					<apply_if layer="1" order="94"/>
+					<apply_if additional="layer=2" order="124"/>
+					<apply_if additional="layer=3" order="152"/>
+					<apply_if layer="-1" order="49"/>
+					<apply_if additional="layer=-2" order="25"/>
+				</case>
+				<case tag="highway" value="trunk" order="83">
+					<apply_if layer="1" order="106"/>
+					<apply_if additional="layer=2" order="136"/>
+					<apply_if additional="layer=3" order="164"/>
+					<apply_if layer="-1" order="61"/>
+					<apply_if additional="layer=-2" order="40"/>
+				</case>
+				<case tag="highway" value="trunk_link" order="70">
+					<apply_if layer="1" order="93"/>
+					<apply_if additional="layer=2" order="123"/>
+					<apply_if additional="layer=3" order="151"/>
+					<apply_if layer="-1" order="48"/>
+					<apply_if additional="layer=-2" order="24"/>
+				</case>
+				<case tag="highway" value="primary" order="82">
+					<apply_if layer="1" order="105"/>
+					<apply_if additional="layer=2" order="135"/>
+					<apply_if additional="layer=3" order="163"/>
+					<apply_if layer="-1" order="60"/>
+					<apply_if additional="layer=-2" order="39"/>
+				</case>
+				<case tag="highway" value="primary_link" order="69">
+					<apply_if layer="1" order="92"/>
+					<apply_if additional="layer=2" order="122"/>
+					<apply_if additional="layer=3" order="150"/>
+					<apply_if layer="-1" order="47"/>
+					<apply_if additional="layer=-2" order="23"/>
+				</case>
+				<case tag="highway" value="secondary" order="81">
+					<apply_if layer="1" order="104"/>
+					<apply_if additional="layer=2" order="134"/>
+					<apply_if additional="layer=3" order="162"/>
+					<apply_if layer="-1" order="59"/>
+					<apply_if additional="layer=-2" order="38"/>
+				</case>
+				<case tag="highway" value="secondary_link" order="68">
+					<apply_if layer="1" order="91"/>
+					<apply_if additional="layer=2" order="121"/>
+					<apply_if additional="layer=3" order="149"/>
+					<apply_if layer="-1" order="46"/>
+					<apply_if additional="layer=-2" order="22"/>
+				</case>
+				<case tag="highway" value="tertiary" order="80">
+					<apply_if layer="1" order="103"/>
+					<apply_if additional="layer=2" order="133"/>
+					<apply_if additional="layer=3" order="161"/>
+					<apply_if layer="-1" order="58"/>
+					<apply_if additional="layer=-2" order="37"/>
+				</case>
+				<case tag="highway" value="tertiary_link" order="67">
+					<apply_if layer="1" order="90"/>
+					<apply_if additional="layer=2" order="120"/>
+					<apply_if additional="layer=3" order="148"/>
+					<apply_if layer="-1" order="45"/>
+					<apply_if additional="layer=-2" order="21"/>
+				</case>
+				<case tag="highway" value="road" order="79">
+					<apply_if layer="1" order="102"/>
+					<apply_if additional="layer=2" order="132"/>
+					<apply_if additional="layer=3" order="160"/>
+					<apply_if layer="-1" order="57"/>
+					<apply_if additional="layer=-2" order="36"/>
+				</case>
+				<case tag="highway" value="unclassified" order="79">
+					<apply_if layer="1" order="102"/>
+					<apply_if additional="layer=2" order="132"/>
+					<apply_if additional="layer=3" order="160"/>
+					<apply_if layer="-1" order="57"/>
+					<apply_if additional="layer=-2" order="36"/>
+				</case>
+				<case tag="highway" value="residential" order="78">
+					<apply_if layer="1" order="101"/>
+					<apply_if additional="layer=2" order="131"/>
+					<apply_if additional="layer=3" order="159"/>
+					<apply_if layer="-1" order="56"/>
+					<apply_if additional="layer=-2" order="35"/>
+				</case>
+				<case tag="highway" value="service" order="78">
+					<apply_if layer="1" order="101"/>
+					<apply_if additional="bridge=yes" order="120"/>
+					<apply_if additional="layer=2" order="131"/>
+					<apply_if additional="layer=3" order="159"/>
+					<apply_if layer="-1" order="56"/>
+					<apply_if additional="layer=-2" order="35"/>
+				</case>
+				<case tag="highway" value="living_street" order="77">
+					<apply_if layer="1" order="100"/>
+					<apply_if additional="layer=2" order="130"/>
+					<apply_if additional="layer=3" order="158"/>
+					<apply_if layer="-1" order="55"/>
+					<apply_if additional="layer=-2" order="34"/>
+				</case>
+				<case tag="highway" value="pedestrian" order="66">
+					<apply_if layer="1" order="99"/>
+					<apply_if additional="layer=2" order="129"/>
+					<apply_if additional="layer=3" order="157"/>
+					<apply_if layer="-1" order="54"/>
+					<apply_if additional="layer=-2" order="33"/>
+				</case>
+				<case tag="highway" value="escape" order="89">
+					<apply_if baseAppMode="car" order="168"/>
+				</case>
+				<case tag="highway" value="track" order="63">
+					<apply_if layer="1" order="111"/>
+					<apply_if additional="layer=2" order="139"/>
+					<apply_if additional="layer=3" order="146"/>
+					<apply_if layer="-1" order="20"/>
+					<apply_if additional="layer=-2" order="19"/>
+				</case>
+				<case tag="highway" value="path" order="62">
+					<apply_if layer="1" order="110"/>
+					<apply_if additional="layer=2" order="138"/>
+					<apply_if additional="layer=3" order="145"/>
+					<apply_if layer="-1" order="19"/>
+					<apply_if additional="layer=-2" order="18"/>
+				</case>
+				<case tag="highway" value="footway" order="61">
+					<apply_if layer="1" order="109"/>
+					<apply_if additional="layer=2" order="137"/>
+					<apply_if additional="layer=3" order="144"/>
+					<apply_if layer="-1" order="18"/>
+					<apply_if additional="layer=-2" order="17"/>
+				</case>
+				<case tag="highway" value="cycleway" order="60">
+					<apply_if layer="1" order="108"/>
+					<apply_if additional="layer=2" order="136"/>
+					<apply_if additional="layer=3" order="143"/>
+					<apply_if layer="-1" order="17"/>
+					<apply_if additional="layer=-2" order="16"/>
+				</case>
+				<case tag="highway" value="steps" order="65">
+					<apply_if layer="1" order="111"/>
+					<apply_if additional="layer=2" order="140"/>
+					<apply_if additional="layer=3" order="166"/>
+					<apply_if layer="-1" order="20"/>
+					<apply_if additional="layer=-2" order="19"/>
+				</case>
+				<case tag="abandoned:highway" value=""/>
+				<case tag="highway" value="via_ferrata"/>
+				<case tag="highway" value="raceway" order="85"/>
+				<case tag="highway" value="bridleway" order="53"/><!--
+				<apply_if maxzoom="13" additional="construction=yes" order="-1"/>-->
 				<case tag="railway" value="subway" layer="-1" order="-1"/>
 				<case tag="railway" value="subway" additional="layer=-2" order="-1"/>
 				<case tag="railway" value="" order="64">
@@ -790,20 +826,22 @@
 					<apply_if noPolygons="true" order="-1"/>
 				</case>
 				<case tag="man_made" value="reinforced_slope"/>
-				<case tag="barrier" value="" order="20">
+				<case tag="barrier" value="" order="20" ignorePolygonArea="true">
 					<apply_if layer="-1" order="-1"/>
 					<apply_if additional="layer=-2" order="-1"/>
 				</case>
+				<case tag="natural" value="coastline_broken" order="63"/>
+				<case tag="natural" value="coastline_line" order="63"/>
 				<case tag="natural" value="volcano" />
 				<case tag="natural" value="cliff" order="20"/>
 				<case tag="natural" value="slope" order="20"/>
 				<case tag="natural" value="earth_bank" order="20"/>
 				<case tag="natural" value="crater"/>
+				<case tag="natural" value="strait"/>
+				<case tag="natural" value="fjord"/>
 				<case tag="natural" value="crevasse">
 					<apply_if lessDetailed="true" maxzoom="15" order="-1"/>
 				</case>
-				<case tag="natural" value="strait"/>
-				<case tag="natural" value="fjord"/>
 				<case tag="geological" value="outcrop"/>
 				<case tag="ford" value="yes" order="85"/>
 				<case tag="ford" value="stepping_stones" order="85"/>
@@ -832,7 +870,7 @@
 				<case tag="railway" value="station"/>
 				<case tag="public_transport" value="platform"/>
 				<case tag="boundary" value="" order="20"/>
-				<case tag="boundary" value="protected_area" order="20"/>
+				<case tag="boundary" value="protected_area" order="79"/>
 				<case tag="contour" value="elevation" order="11">
 					<apply_if contourDensity="medium_w" additional="contourtype=10m" order="-1"/>
 					<apply_if contourDensity="medium_w" additional="contourtype=50m" order="-1"/>
@@ -868,7 +906,7 @@
 		<switch><!-- pas d'effet !!! -->
 			<switch minzoom="11" tag="osmand" value="file_waypoint">
 				<case additional="file_has_waypoints=true" />
-				<apply textWrapWidth="25" textHaloRadius="1" textColor="#ff00ff" textHaloColor="#aaffffff" textOrder="1">
+				<apply textWrapWidth="25" textHaloRadius="1" textColor="#ff00ff" textHaloColor="#aaffffff" textOrder="10">
 					<case maxzoom="12" textSize="9"/>
 					<case minzoom="14" textSize="10"/>
 				</apply>
@@ -876,7 +914,7 @@
 			</switch>
 
 			<switch minzoom="10" tag="osmand" value="fav" >
-				<apply textWrapWidth="25" textHaloRadius="1" textColor="#00ffff" textHaloColor="#aaffffff" textOrder="1">
+				<apply textWrapWidth="25" textHaloRadius="1" textColor="#00ffff" textHaloColor="#aaffffff" textOrder="11">
 					<case maxzoom="12" textSize="9"/>
 					<case minzoom="14" textSize="10"/>
 				</apply>
@@ -884,7 +922,7 @@
 			</switch>
 
 			<switch minzoom="9" tag="route" value="point" nameTag="" >
-				<apply textWrapWidth="25" textHaloRadius="1" textColor="#ffff00" textHaloColor="#ccebf4ff" textOrder="1">
+				<apply textWrapWidth="25" textHaloRadius="1" textColor="#ffff00" textHaloColor="#ccebf4ff" textOrder="12">
 					<case maxzoom="12" textSize="9"/>
 					<case minzoom="14" textSize="10"/>
 				</apply>
@@ -893,12 +931,12 @@
 		</switch>
 
 		<switch textColor="#000000" textWrapWidth="20">
-			<case tag="osmand_legend" value="header" textOrder="1" nameTag="" textBold="true" textDy="-11" textHaloRadius="1" textHaloColor="#55ffffff">
+			<case tag="osmand_legend" value="header" textOrder="100" nameTag="" textBold="true" textDy="-11" textHaloRadius="1" textHaloColor="#55ffffff">
 				<case minzoom="16" maxzoom="16" textSize="18"/>
 				<case minzoom="17" maxzoom="17" textSize="19" textWrapWidth="30"/>
 				<case minzoom="18" textSize="20" textWrapWidth="30"/>
 			</case>
-			<case tag="osmand_legend" value="element" textOrder="5" textHaloRadius="2:2" textHaloColor="#55ffffff" nameTag="">
+			<case tag="osmand_legend" value="element" textOrder="105" textHaloRadius="2:2" textHaloColor="#55ffffff" nameTag="">
 				<case minzoom="17" maxzoom="17" textSize="11"/>
 				<case minzoom="18" textSize="12" textWrapWidth="30"/>
 			</case>
@@ -1054,7 +1092,7 @@
 		</switch>
 
 		<!-- routes ref cricri-->
-		<switch textMinDistance="130" textWrapWidth="10" textSize="9" textBold="true" textHaloRadius="0" cap="ROUND"><!---->
+		<switch textMinDistance="130" textWrapWidth="10" textSize="9" textBold="true" textHaloRadius="0" cap="ROUND">
 			<switch minzoom="7" textSize="10" textOrder="249" >
 				<case tag="highway" value="" nameTag="int_ref" />
 				<apply textColor="#ffffff" >
@@ -1123,10 +1161,7 @@
 					<case textLength="3" textShield="orange_square_2_road_shield"/>
 					<case textLength="4" textShield="orange_square_3_road_shield"/>
 					<case textLength="5" textShield="orange_square_4_road_shield"/>
-					<case textLength="6" textShield="orange_square_5_road_shield"/><!--
-					<case textLength="7" textShield="orange_square_6_road_shield"/>
-					<case textLength="8" textShield="orange_square_7_road_shield"/>
-					<case textLength="9" textShield="orange_square_8_road_shield"/>-->
+					<case textLength="6" textShield="orange_square_5_road_shield"/>
 					<case textHaloColor="#ffaf66" textHaloRadius="7"/>
 				</apply>
 			</switch>
@@ -1488,26 +1523,7 @@
 				<case minzoom="16" tag="natural" value="rock" nameTag="" textOrder="60" />
 				<case minzoom="16" tag="natural" value="stone" nameTag="" textOrder="60" />
 				<case minzoom="16" tag="natural" value="bare_rock" nameTag="" textOrder="60" />
-				<case minzoom="13" tag="mountain_pass" value="yes" nameTag="" textBold="false" textOrder="44" >
-					<!--
-					<apply_if additional="ele_limit=200" textOrder="83"/>
-					<apply_if additional="ele_limit=500" textOrder="82"/>
-					<apply_if additional="ele_limit=1000" textOrder="81"/>
-					<apply_if additional="ele_limit=1500" textOrder="80"/>
-					<apply_if additional="ele_limit=2000" textOrder="79"/>
-					<apply_if additional="ele_limit=2500" textOrder="78"/>
-					<apply_if additional="ele_limit=3000" textOrder="77"/>
-					<apply_if additional="ele_limit=3500" textOrder="76"/>
-					<apply_if additional="ele_limit=4000" textOrder="75"/>
-					<apply_if additional="ele_limit=4500" textOrder="74"/>
-					<apply_if additional="ele_limit=5000" textOrder="73"/>
-					<apply_if additional="ele_limit=5500" textOrder="72"/>
-					<apply_if additional="ele_limit=6000" textOrder="71"/>
-					<apply_if additional="ele_limit=6500" textOrder="70"/>
-					<apply_if additional="ele_limit=7000" textOrder="69"/>
-					<apply_if additional="ele_limit=7500" textOrder="68"/>
-					<apply_if additional="ele_limit=9000" textOrder="67"/>-->
-				</case>
+				<case minzoom="13" tag="mountain_pass" value="yes" nameTag="" textBold="false" textOrder="44" />
 				<apply textSize="11" textDy="0" intersectionMargin="20" intersectionSizeFactor="1" intersectsWith="place">
 					<case maxzoom="13" nameTag="name" />
 					<case maxzoom="15" nameTag="" />
@@ -1517,42 +1533,43 @@
 			<apply_if maxzoom="13" textHaloColor="#ccffffff" />
 			</switch>
 
-			<!-- natural  -->
-			<switch minzoom="9" textOrder="40" intersectionMargin="0.1" intersectionSizeFactor="0.1" intersectsWith="any"><!-- -->
-				<case  tag="region:type" value="mountain_area" />
+			<!-- natural   textOrder="40"-->
+			<switch minzoom="9" textOrder="1" intersectsWith="any"  intersectionSizeFactor="0.1" intersectionMargin="0.1"> <!---->
+				<case  tag="region:type" value="mountain_area"  nameTag=""/>
+				<case  tag="natural" value="mountain_area"  nameTag=""/>
+				<case  tag="natural" value="mountain_range"  nameTag=""/>
 				<apply textColor="#66990000" textBold="true" textItalic="true" textHaloColor="#99ffffff" textHaloRadius="4" textOnPath="true">
-					<case maxzoom="11" textSize="11" textDy="0" textColor="#88990000"/>
-					<case maxzoom="12" textSize="13" textDy="0" textColor="#77990000"/>
-					<case maxzoom="13" textSize="16" textDy="0"/>
-					<case maxzoom="14" textSize="19" textDy="0"/>
-					<case maxzoom="15" textSize="22" textDy="0"/>
-					<case maxzoom="16" textSize="24" textDy="0"/>
-					<case minzoom="17" textSize="28" textDy="0"/>
+					<case maxzoom="11" textSize="12" textColor="#88990000" textHaloColor="#88ffffff"/>
+					<case maxzoom="12" textSize="16" textColor="#77990000" textHaloColor="#77ffffff"/>
+					<case maxzoom="13" textSize="22" textColor="#66990000" textHaloColor="#66ffffff"/>
+					<case maxzoom="14" textSize="30" textColor="#55990000" textHaloColor="#55ffffff"/>
+					<case maxzoom="15" textSize="40" textColor="#44990000" textHaloColor="#44ffffff"/>
+					<case maxzoom="16" textSize="54" textColor="#33990000" textHaloColor="#33ffffff"/>
+					<case minzoom="17" textSize="68" textColor="#22990000" textHaloColor="#22ffffff"/>
 				</apply>
 				<apply_if nightMode="true" textSize="0" />
 			</switch>
 
-			<switch minzoom="11" textOrder="9" intersectionMargin="0.1" intersectionSizeFactor="0.1" intersectsWith="any"><!-- -->
+			<switch minzoom="12" textOrder="8" intersectionMargin="0.1" intersectionSizeFactor="0.1" intersectsWith="any"><!--textOrder="9" -->
 				<case tag="natural" value="gorge"  />
-				<apply textColor="#66990000" textBold="true" textItalic="true" textHaloColor="#99ffffff" textHaloRadius="4" textOnPath="true">
-					<case maxzoom="11" textSize="11" textDy="0" textColor="#88990000"/>
-					<case maxzoom="12" textSize="13" textDy="0" textColor="#77990000"/>
-					<case maxzoom="13" textSize="16" textDy="0"/>
-					<case maxzoom="14" textSize="19" textDy="0"/>
-					<case maxzoom="15" textSize="22" textDy="0"/>
-					<case maxzoom="16" textSize="24" textDy="0"/>
-					<case minzoom="17" textSize="28" textDy="0"/>
+				<apply textColor="#99990000" textBold="true" textItalic="true" textHaloColor="#99ffffff" textHaloRadius="4" textOnPath="true">
+					<case maxzoom="12" textSize="10" textDy="0" textColor="#77990000"/>
+					<case maxzoom="13" textSize="12" textDy="0"/>
+					<case maxzoom="14" textSize="14" textDy="0"/>
+					<case maxzoom="15" textSize="18" textDy="0"/>
+					<case maxzoom="16" textSize="20" textDy="0"/>
+					<case minzoom="17" textSize="22" textDy="0"/>
 				</apply>
 				<apply_if nightMode="true" textSize="0" />
 			</switch>
-			<switch minzoom="13" textOrder="41" intersectionMargin="0.1" intersectionSizeFactor="0.1" intersectsWith="any">
+			<switch minzoom="13" textOrder="9" intersectionMargin="0.1" intersectionSizeFactor="0.1" intersectsWith="any">
 				<case tag="natural" value="valley"  />
-				<apply textColor="#66990000" textBold="true" textItalic="true" textHaloColor="#99ffffff" textHaloRadius="4" textOnPath="true">
-					<case maxzoom="13" textSize="14" textDy="10"/>
-					<case maxzoom="14" textSize="16" textDy="7"/>
-					<case maxzoom="15" textSize="18" textDy="5"/>
-					<case maxzoom="16" textSize="20" textDy="3"/>
-					<case minzoom="17" textSize="22" textDy="0"/>
+				<apply textColor="#99990000" textBold="true" textItalic="true" textHaloColor="#99ffffff" textHaloRadius="4" textOnPath="true" >
+					<case maxzoom="13" textSize="10" textDy="0"/>
+					<case maxzoom="14" textSize="11" textDy="0"/>
+					<case maxzoom="15" textSize="12" textDy="0"/>
+					<case maxzoom="16" textSize="13" textDy="0"/>
+					<case minzoom="17" textSize="14" textDy="0"/>
 				</apply>
 				<apply_if nightMode="true" textSize="0" />
 			</switch>
@@ -1757,8 +1774,7 @@
 				<apply textColor="#660000" textHaloColor="#ffffff" textHaloRadius="1" textWrapWidth="20" textOrder="135" textItalic="true">
 				</apply>
 			</switch>
-			<!--
-			<apply_if noPolygons="true" textHaloColor="#000000" textHaloRadius="4"/> -->
+
 			<apply_if nightMode="true" textHaloColor="#000000" textColor="#669966" textHaloRadius="1:1"/>
 		</switch>
 
@@ -1879,18 +1895,20 @@
             </switch>
         </switch>
 
-		<switch textColor="#2665ff" textHaloColor="#ffffff" textItalic="true" textWrapWidth="17">
-			<switch minzoom="14" textOrder="136"  nameTag="" >
-				<case minzoom="15" tag="landuse" value="reservoir" />
+		<switch textColor="#2665ff" textHaloColor="#ffffff" textItalic="true" >
+			<switch minzoom="14" textOrder="42" intersectionMargin="0.1" intersectionSizeFactor="5" intersectsWith="any"><!-- -->
+				<case tag="landuse" value="reservoir" />
 				<case tag="natural" value="water" >
 					<apply_if additional="leisure=marina" minzoom="14" />
+					<apply_if additional="water=lock" minzoom="18" />
+					<apply_if additional="seamark:type=lock_basin" minzoom="18" />
 				</case>
-				<apply intersectionSizeFactor="5" intersectsWith="any">
-					<case maxzoom="12" textSize="10" intersectionMargin="" />
-					<case maxzoom="13" textSize="11" intersectionMargin="" />
-					<case maxzoom="14" textSize="12" intersectionMargin=""/>
-					<case maxzoom="15" textSize="12" intersectionMargin="" />
-					<case minzoom="16" textSize="12" intersectionMargin="" />
+				<apply>
+					<case maxzoom="12" textSize="10" />
+					<case maxzoom="13" textSize="11" />
+					<case maxzoom="14" textSize="12" />
+					<case maxzoom="15" textSize="12" />
+					<case minzoom="16" textSize="12" />
 				</apply>
 				<apply_if  >
 					<case maxzoom="13" textHaloRadius="1" textHaloColor="#ffffff"/>
@@ -1900,9 +1918,9 @@
 			</switch>
         </switch>
 
-		<switch textColor="#2665ff" textHaloColor="#ffffff" textItalic="true" textOnPath="false" textSize="11" intersectionMargin="5" intersectionSizeFactor="2" intersectsWith="place" >
+		<switch textColor="#2665ff" textHaloColor="#ffffff" textItalic="true" textOnPath="false" textSize="11"  ><!--intersectionMargin="5" intersectionSizeFactor="2" intersectsWith="place" -->
 			<case minzoom="14" tag="waterway" value="river"  textOrder="50" textWrapWidth="10"/>
-			<case minzoom="16" tag="waterway" value="canal" textOnPath="true" intersectionMargin="40" intersectsWith="any" intersectionSizeFactor="5" textOrder="185"/>
+			<case minzoom="16" tag="waterway" value="canal" textOnPath="true" intersectionMargin="40" intersectsWith="none" intersectionSizeFactor="5" textOrder="42"/><!--  -->
 			<case minzoom="16" tag="waterway" value="waterfall" additional="osmand_remarkable_waterfall=yes" nameTag2="height"  textOnPath="true" textOrder="217"/>
 			<case minzoom="18" tag="waterway" value="stream" textOnPath="true" textOrder="206"/>
 			<case minzoom="18" tag="landuse" value="basin"  textOrder="218"/>
@@ -1928,8 +1946,6 @@
 			<apply textSize="14" textColor="#883287" textWrapWidth="35" textHaloRadius="2" textHaloColor="#aaffffff"/>
 			<apply_if nightMode="true" textColor="#6699ff" textHaloColor="#006699ff" textHaloRadius="1"/>
 		</switch>
-<!--
-		<case tag="" value="" minzoom="13" textSize="8" textBold="true" textColor="#ff00ff" />-->
 
 	</text>
 
@@ -1953,6 +1969,11 @@
 		<switch tag="amenity" value="place_of_worship" icon="religion_christian" shield="cross_shield" iconVisibleSize="24" >
 			<case minzoom="14" iconOrder="46" intersectionSizeFactor="0.7"/>
 		</switch>
+
+		<switch tag="building" value="chapel" icon="religion_christian" shield="cross_shield" iconVisibleSize="24" >
+			<case minzoom="14" iconOrder="46" intersectionSizeFactor="0.7"/>
+		</switch>
+
 
 		<!-- Sport, leisure -->
 		<case minzoom="14" tag="leisure" value="horse_riding" icon="equestrian" shield="gray_round_shield" iconVisibleSize="24" iconOrder="166">
@@ -2092,11 +2113,7 @@
 				</case>
 				<case additional="parking=underground" icon="parking_underground">
 					<case additional="fee=yes" icon="amenity_parking_underground_paid"/>
-				</case><!--
-				<case additional="fee=yes" icon="amenity_parking_paid"/>
-				<apply_if additional="access=customers" icon=""/>amenity_parking_private
-				<apply_if additional="access=private" icon=""/>
-				<apply_if additional="access=no" icon=""/> -->
+				</case>
 			</case>
 			<case minzoom="17" tag="amenity" value="motorcycle_parking" icon="amenity_motorcycle_parking" iconVisibleSize="32" iconOrder="80">
 				<case additional="fee=yes" icon="amenity_motorcycle_parking_paid"/>
@@ -2190,6 +2207,14 @@
 		</switch>
 
 		<switch nightMode="false" iconOrder="5"><!-- nature -->
+			<!-- lac -->
+			<switch minzoom="14" iconVisibleSize="8">
+				<case tag="natural" value="water"/>
+				<case tag="landuse" value="reservoir"/>
+				<apply icon="osmc_white_dot" shield=""/>
+				<apply_if lessDetailed="true" textLength="0" icon=""/>
+				<apply_if textLength="0" icon=""/>
+			</switch>
 			<switch minzoom="12" iconVisibleSize="28">
 				<case tag="natural" value="wood"/>
 				<case tag="landuse" value="forest"/>
@@ -2219,9 +2244,7 @@
 			<case minzoom="14" tag="" value="" >
 				<apply_if additional="ruins=yes" icon="osmc_green_l" shield="" iconOrder="158"/>
 				<apply_if nightMode="true" shield="" />
-			</case><!---->
-			<case minzoom="10" tag="natural" value="gorge" icon="topo_viewpoint" shield="topo_viewpoint_shield" iconOrder="45"/>
-			<case minzoom="12" tag="natural" value="valley" icon="topo_viewpoint" shield="topo_viewpoint_shield" iconOrder="47"/>
+			</case>
 			<case minzoom="14" tag="historic" value="ruins" icon="osmc_green_l" shield="" iconOrder="158" color="#00ff00" color_0="#00ff00" color_1="#00ff00" color_2="#00ff00">
 				<apply_if nightMode="true" shield="" />
 			</case>
@@ -2396,6 +2419,8 @@
 			<case minzoom="17" tag="highway" value="traffic_signals" icon="highway_traffic_signals_map" shield="traffic_signals_shield"/>
 			<case minzoom="15" tag="railway" value="level_crossing" icon="level_crossing_map" shield="" iconVisibleSize="24" />
 			<case minzoom="12" tag="highway" value="speed_camera" icon="highway_speed_camera" shield="red_round_shield" iconOrder="20"/>
+			<case minzoom="15" tag="traffic_sign" value="FR:B7b" icon="access_no" shield="red_round_shield" iconVisibleSize="24" />
+			<case minzoom="15" tag="traffic_sign" value="FR:B0" icon="access_no" shield="red_round_shield" iconVisibleSize="24" />
 		</switch>
 
 		<switch nightMode="false"><!-- water -->
@@ -2434,6 +2459,8 @@
 		</switch>
 
 		<switch nightMode="false" iconOrder="160"><!-- man made -->
+			<case minzoom="16" tag="man_made" value="storage_tank" icon="reservoir" shield="blue_round_shield"/>
+			<case minzoom="16" tag="emergency" value="water_tank" icon="reservoir" shield="blue_round_shield"/>
 			<case minzoom="16" tag="man_made" value="kiln" icon="kiln" shield="kiln_shield"/>
 			<case minzoom="19" tag="man_made" value="street_cabinet" icon="street_cabinet" shield="street_cabinet_shield"/>
 			<case minzoom="15" tag="man_made" value="cairn" icon="cairn" shield="cairn_shield"/>
@@ -2556,7 +2583,7 @@
 				<case tag="military" value="bunker"/>
 				<case tag="military" value="barracks"/>
 				<apply color="#669900"/>
-			</switch>
+			</switch><!---->
 			<apply>
 				<switch>
 					<case additional="ruins=yes"/>
@@ -2568,6 +2595,7 @@
 				<case tag="building" value="collapsed"/>
 				<case tag="building" value="disused"/>
 				<case tag="building" value="ruins"/>
+				<case tag="ruins" value="yes"/>
 				<case tag="abandoned:building" value=""/>
 				<case tag="disused:building" value=""/>
 				<apply color="#339900" color_2="#000000" pathEffect_2="9_3" strokeWidth_2="1:1"/>
@@ -2592,14 +2620,14 @@
 				<apply_if minzoom="16" strokeWidth_2="1:1"/>
 			</switch>
 			<case tag="building" value="construction" color="#999999" color_2="#666666" pathEffect_2="8_4">
-				<apply_if minzoom="16" strokeWidth_2="1:1"/>
+			<apply_if maxzoom="15" strokeWidth_2="1.2:1" />
+			<apply_if minzoom="16" strokeWidth_2="1:1"/>
 			</case>
 
 			<case tag="building" value="pyramid" color="#be865d" color_2="#000000" strokeWidth_2="1:1">
 				<apply_if nightMode="true" color="#665228" />
 			</case>
 
-			<apply_if maxzoom="15" strokeWidth_2="1.2:1" color_2="#666666"/>
 			<apply_if minzoom="16" strokeWidth_2="0.7:1"/>
 			<apply_if nightMode="true" color="#333333" color_2="#333333" />
 		</switch>
@@ -2613,6 +2641,12 @@
 					<apply_if nightMode="true" color_2="#777777" />
 				</case>
 			</case>
+			<case minzoom="13" tag="amenity" value="grave_yard" shader="topo_cemetery_small" strokeWidth_2="1" color_2="#222222">
+				<case minzoom="14" shader="topo_cemetery">
+					<apply_if nightMode="true" color_2="#777777" />
+				</case>
+			</case>
+			<case minzoom="14" tag="leisure" value="track" color="#f3ffe9" color_2="#000000" cap_2="ROUND"/>
 			<case minzoom="12" tag="leisure" value="beach_resort" color="#e6d4a9" strokeWidth_2="0.5:1" color_2="#ad862b"/>
 			<case minzoom="12" tag="natural" value="beach" shader="beach3">
 				<apply_if nightMode="true" shader="beach2night"/>
@@ -2630,6 +2664,7 @@
 			<!-- sport -->
 			<switch minzoom="14">
 				<case tag="leisure" value="stadium" color_2="#66cc99"/>
+				<case minzoom="15" tag="leisure" value="sports_centre" color_2="#66cc99"/>
 				<case minzoom="15" tag="leisure" value="pitch" color_2="#66cc99"/>
 				<case minzoom="16" tag="leisure" value="water_park" color_2="#66cc99"/>
 				<case minzoom="16" tag="leisure" value="bleachers" color_2="#66cc99"/>
@@ -2638,7 +2673,7 @@
 			</switch>
 
 			<!-- carriere -->
-			<case minzoom="12" tag="landuse" value="quarry" shader="quarry3_abandoned_night" color="#66996633" color_2="#996633" strokeWidth_2="0.7" >
+			<case minzoom="12" tag="landuse" value="quarry" shader="quarry3_abandoned_night" color_0="#33ff9900" color_2="#996633" strokeWidth_2="0.7" >
 				<apply_if nightMode="true" color="#ccffff00" />
 			</case>
 
@@ -2738,69 +2773,90 @@
 
 			<case minzoom="8" tag="natural" value="desert" color="#fff7bf"/>
 
-			<!-- bois  #dcefd9-->
-			<switch minzoom="8" >
-				<case tag="natural" value="wood"/>
-				<case tag="landuse" value="forest"/>
-				<case tag="natural" value="tree"/>
+			<!-- vegetation-->
+			<switch>
+				<!-- bois  #dfe9d3-->
+				<switch minzoom="8" >
+					<case tag="natural" value="wood"/>
+					<case tag="landuse" value="forest"/>
+					<case tag="natural" value="tree"/><!--
+					<case tag="natural" value="tree_row"/>-->
+					<apply color_0="#dce6d0"  >
+						<case maxzoom="11" color_0="#cfd9c3" />
+					</apply>
+					<apply_if nightMode="true" color_0="#202c20" strokeWidth_2="0:0" />
+				</switch>
+
+				<!-- maquis  7fe9efd9-->
+				<switch minzoom="10">
+					<case tag="natural" value="scrub" />
+					<case tag="natural" value="heath" />
+					<case tag="natural" value="tundra" />
+					<case minzoom="15" tag="landuse" value="greenfield"/>
+					<case minzoom="15" tag="landuse" value="brownfield"/>
+					<apply color_0="#e6efd6" >
+						<case maxzoom="11" color_0="#d6dfc6" />
+					</apply>
+					<apply_if nightMode="true" color_0="#2c2f20" strokeWidth_2="0:0" />
+				</switch>
+
+				<!-- vigne Ffefff-->
+				<switch minzoom="10">
+					<case tag="landuse" value="vineyard" color="#Fff3ff" />
+					<apply_if minzoom="14" maxzoom="14" color="#ddFff3ff" />
+					<apply_if minzoom="15" maxzoom="15" color="#bbFff3ff" />
+					<apply_if minzoom="16" color="#99Fff3ff" />
+					<apply_if nightMode="true" color="#292029" strokeWidth_2="0:0"/>
+				</switch>
+
+				<!-- cultures -->
+				<switch minzoom="8" color="#FFF6E6" >
+					<case tag="landuse" value="farmland" />
+					<case minzoom="10" tag="landuse" value="allotments" />
+					<case minzoom="6" tag="natural" value="land" />
+					<case minzoom="12" tag="landuse" value="orchard" />
+					<case minzoom="12" tag="landuse" value="plant_nursery"/>
+					<apply_if minzoom="14" maxzoom="14" color="#ddFFF6E6" />
+					<apply_if minzoom="15" maxzoom="15" color="#bbFFF6E6" />
+					<apply_if minzoom="16" color="#99FFF6E6" />
+					<apply_if nightMode="true" color="#222222" />
+				</switch>
+
+				<!-- prairie -->
+				<switch minzoom="10" >
+						<case tag="natural" value="grassland"/>
+						<case tag="landuse" value="meadow"/>
+						<case tag="natural" value="fell" />
+						<apply color="#f3ffe3"  >
+							<case maxzoom="11" color="#e3efd3" />
+						</apply><!---->
+						<apply_if minzoom="14" maxzoom="14" color="#ddf3ffe3" />
+						<apply_if minzoom="15" maxzoom="15" color="#bbf3ffe3" />
+						<apply_if minzoom="16" color="#99f3ffe3" />
+						<apply_if nightMode="true" color="#303f3f" strokeWidth_2="0:0"/>
+					</switch>
+
+					<apply_if>
+						<case maxzoom="10" color_2="#00999999" strokeWidth_2="0"/>
+						<case maxzoom="11" color_2="#33999999" strokeWidth_2="1"/>
+						<case maxzoom="12" color_2="#44999999" strokeWidth_2="1"/>
+						<case maxzoom="13" color_2="#55999999" strokeWidth_2="1"/><!--#e0d0d0-->
+						<case maxzoom="14" color_2="#44999999" strokeWidth_2="1"/>
+						<case maxzoom="15" color_2="#33999999" strokeWidth_2="1"/>
+						<case minzoom="16" color_2="#22999999" strokeWidth_2="1"/>
+					</apply_if>
+			</switch>
+
+			<switch minzoom="12" >
 				<case tag="natural" value="tree_row"/>
-				<apply color_0="#dfe9d3"  >
-					<case maxzoom="11" color_0="#cfd9c3" />
+				<apply color_2="#dce6d0" >
+					<case maxzoom="13" strokeWidth_2="3"/>
+					<case maxzoom="14" strokeWidth_2="4"/>
+					<case maxzoom="15" strokeWidth_2="6"/>
+					<case maxzoom="16" strokeWidth_2="8"/>
+					<case maxzoom="17" strokeWidth_2="10"/>
+					<case minzoom="18" strokeWidth_2="12"/>
 				</apply>
-				<apply_if minzoom="13" color_2="#cfe0d0" strokeWidth_2="0.5:1"/>
-				<apply_if nightMode="true" color_0="#202c20" strokeWidth_2="0:0" />
-			</switch>
-
-			<!-- maquis  eff9dc-->
-			<switch minzoom="10">
-				<case tag="natural" value="scrub" />
-				<case minzoom="15" tag="landuse" value="greenfield"/>
-				<case minzoom="15" tag="landuse" value="brownfield"/>
-				<apply color_0="#7fe9efd9" >
-					<case maxzoom="11" color_0="#7fd9dfc9" />
-				</apply>
-				<apply_if minzoom="13" color_2="#dfe9cc" strokeWidth_2="0.5:1"/>
-				<apply_if nightMode="true" color_0="#2c2f20" strokeWidth_2="0:0" />
-			</switch>
-			<!-- lande f3ffef-->
-			<switch minzoom="10">
-				<case tag="natural" value="heath" />
-				<case tag="natural" value="tundra" />
-				<apply color_0="#7fe9efd9" >
-					<case maxzoom="11" color_0="#7fd9dfc9" />
-				</apply>
-				<apply_if minzoom="13" color_2="#dfe9cc" strokeWidth_2="0.5:1"/>
-				<apply_if nightMode="true" color_0="#2c2c20" strokeWidth_2="0:0" />
-			</switch>
-
-			<!-- vigne FcF6Fc-->
-			<switch minzoom="10">
-				<case tag="landuse" value="vineyard" color="#Ffefff" />
-				<apply_if minzoom="11" color_2="#efdfef" strokeWidth_2="0.5:1"/>
-				<apply_if nightMode="true" color="#292029" strokeWidth_2="0:0"/>
-			</switch>
-
-			<!-- cultures -->
-			<switch minzoom="8" color="#FFF6E3" >
-				<case minzoom="10" tag="landuse" value="allotments" />
-				<case minzoom="6" tag="landuse" value="farmland" />
-				<case minzoom="6" tag="natural" value="land" />
-				<case minzoom="12" tag="landuse" value="orchard" />
-				<case minzoom="12" tag="landuse" value="plant_nursery"/>
-				<apply_if minzoom="13" color_2="#eFe6d3" strokeWidth_2="0.5:1"/>
-				<apply_if nightMode="true" color="#222222" />
-			</switch>
-
-			<!-- prairie -->
-			<switch minzoom="10" >
-				<case tag="natural" value="grassland"/>
-				<case tag="landuse" value="meadow"/>
-				<case tag="natural" value="fell" />
-				<apply color="#f3ffe9"  >
-					<case maxzoom="11" color="#e3efd9" />
-				</apply>
-				<apply_if minzoom="13" color_2="#e3efdf" strokeWidth_2="0.5:1"/>
-				<apply_if nightMode="true" color="#303f3f" strokeWidth_2="0:0"/>
 			</switch>
 
 			<!-- pelouse f3ffe9-->
@@ -2824,13 +2880,16 @@
 			</switch>
 
 			<!-- residential 70BBBBBB-->
-			<case minzoom="11" tag="landuse" value="residential" color="#cccccc">
+			<switch minzoom="11"  color="#cccccc">
+				<case tag="landuse" value="residential"/>
+				<case tag="landuse" value="farmyard" />
 				<apply_if nightMode="true" color="#000000" />
-			</case>
+			</switch>
 
 			<case minzoom="12" tag="landuse" value="industrial" color="#e0c0c0"/>
 			<case minzoom="12" tag="landuse" value="railway" color="#EDE8EB"/>
 			<case minzoom="14" tag="landuse" value="garages" color="#EDE8EB"/>
+			<case minzoom="14" tag="amenity" value="parking" color="#ffffff"  />
 
 			<case minzoom="13" tag="man_made" value="pier" color="#ffffff"/>
 
@@ -2938,7 +2997,7 @@
 			<case minzoom="4" tag="natural" value="bay"/>
 
 			<!-- barrière -->
-			<case minzoom="16" tag="barrier" value="hedge" color="#aed1a0" color_2="#aed1a0" strokeWidth_2="1:1"/>
+			<case minzoom="16" tag="barrier" value="hedge" color="#00aed1a0" color_2="#aed1a0" strokeWidth_2="1:1"/>
 			<case minzoom="15" tag="barrier" value="city_wall">
 				<case minzoom="15" strokeWidth_2="1:1"/>
 			</case>
@@ -2950,12 +3009,15 @@
 				<apply color="#77999999" color_2="#888888" cap_2="SQUARE"/>
 			</case>
 			<switch minzoom="16">
-				<case tag="barrier" value="wall"/>
-				<apply color="#44999999" color_2="#333333" strokeWidth_2="0.7:1"/>
-			</switch>
-			<switch minzoom="16">
 				<case tag="barrier" value="fence"/>
-				<apply color="$null" color_2="#333333" pathEffect="1_5" strokeWidth_2="0.7:1"/>
+				<case tag="barrier" value="wall"/>
+				<apply color="$null" color_2="#ff6666" >
+					<case maxzoom="16" strokeWidth_2="0.8:1" pathEffect_2="1_3"/>
+					<case maxzoom="17" strokeWidth_2="0.9:1" pathEffect_2="1_3"/>
+					<case maxzoom="18" strokeWidth_2="1:1" pathEffect_2="1_3"/>
+					<case maxzoom="19" strokeWidth_2="1.1:1.1" pathEffect_2="1_4"/>
+					<case minxzoom="20" strokeWidth_2="1.2:1.2" pathEffect_2="1_5"/>
+				</apply>
 			</switch>
 
 		</switch>
@@ -2995,8 +3057,8 @@
 				<apply color_2="#7479ec" strokeWidth_2="1.3:1"/>
 			</switch>
 			<case minzoom="10" tag="waterway" value="dock" color_2="#aa8387d5" strokeWidth_2="3:1"/>
-			<apply color="#7ad1ed"/>
-			<apply_if additional="intermittent=yes" strokeWidth_2="1:1" color_2="#7479ec" pathEffect_2="7_5"/>
+			<apply color="#7ad1ed"/><!--
+			<apply_if additional="intermittent=yes" strokeWidth_2="1:1" color_2="#7479ec" pathEffect_2="7_5"/>-->
 			<apply_if nightMode="true" color="#114477" strokeWidth_2="0"/>
 			<apply_if arriereplan="true" color="#336699" strokeWidth_2="0"/>
 		</switch>
@@ -3340,7 +3402,6 @@
 					<case minzoom="21" strokeWidth="13:3.66" />
 					<apply color="#ffecec" shadowColor="#994408"/>
 				</apply>
-				<apply_if additional="oneway=yes" onewayArrowsColor="#00cccccc"/>
 				<apply_if nightMode="true" color="#441122" />
 			</switch>
 
@@ -3717,12 +3778,12 @@
 				<apply_if additional="location=roof" color_5="#ff00ff" /> NOK
 				<apply_if additional="tunnel=building_passage" color_5="#0066ff99" /> NOK couleur héritée de covered=yes
 				<apply_if level="1" disable="true" /> enlève tout !! -->
-				<apply_if nightMode="true" color_5="#999999" />
+				<apply_if nightMode="true" color_5="#999999" /><!--
 				<apply_if additional="trail_visibility=no"  >
 					<case maxzoom="14" strokeWidth_5="0" />
 					<case minzoom="15"  pathEffect_5="" color_5="#ff3333" strokeWidth_5="1"/>
 					<apply_if nightMode="true" color_5="#7f0000" />
-				</apply_if>
+				</apply_if>-->
 				<apply_if arriereplan="true" color_5="#999999" color="000000" strokeWidth="0.1:0" shadowColor="#50000000" shadowRadius="4"/>
 				<apply_if layer="-2" disable="true" />
 				<apply_if layer="-3" disable="true" />
@@ -4002,13 +4063,13 @@
 		</switch>
 
 		<!-- power -->
-		<switch color="#666666" >
+		<switch color="#666666" color_2="#999999">
 			<case minzoom="13" tag="power" value="line" pathEffect="1_2">
-				<case maxzoom="14" strokeWidth="0.7:"/>
-				<case minzoom="15" strokeWidth="0.7:"/>
+				<apply strokeWidth="0.7:" pathEffect="1_2" />
 			</case>
 			<case minzoom="15" tag="power" value="minor_line" >
 				<apply strokeWidth="0.7:" pathEffect="1_2" />
+				<apply strokeWidth_2="4:1" pathEffect_2="3_40" />
 			</case>
 			<apply_if lessDetailed="true" maxzoom="15" strokeWidth="0:0" strokeWidth_2="0:0"/>
 		</switch>
@@ -4146,9 +4207,13 @@
 				    <case maxzoom="15" shadowRadius="0.65:1" />
 				    <case minzoom="16" shadowRadius="0.7:1" />
 				</apply>
-				<apply_if additional="intermittent=yes" >
+				<apply_if additional="intermittent=yes" ><!--
 					<case maxzoom="14" shadowRadius="0" />
-					<case pathEffect="6_4" />
+					<case pathEffect="10_4" />-->
+				    <case maxzoom="13" shadowRadius="0.4" pathEffect="5_2"/>
+				    <case maxzoom="14" shadowRadius="0.5:1" pathEffect="6_3"/>
+				    <case maxzoom="15" shadowRadius="0.6:1" pathEffect="8_3"/>
+				    <case minzoom="16" shadowRadius="0.7:1" pathEffect="10_4"/>
 				</apply_if>
 			</switch>
 
@@ -4404,15 +4469,25 @@
 			<case tag="man_made" value="earth_bank"/>
 			<case tag="man_made" value="embankment" />
 			<case tag="embankment" value="yes" />
-			<apply  color="#70cc9933" >
+			<apply  color="#99cc9933" >
 				<case maxzoom="15" strokeWidth="4:1" pathEffect="1_3"/>
 				<case maxzoom="16" strokeWidth="7:1" pathEffect="1_4"/>
 				<case minzoom="17" strokeWidth="10:1" pathEffect="1_5"/>
 			</apply>
 			<apply_if nightMode="true" color="#333300" />
 		</switch>
-		<switch minzoom="13">
+		<switch minzoom="9"><!--ligne obligatoire pour text on path (invisible)-->
+			<case tag="natural" value="mountain_area"/>
+			<case tag="region:type" value="mountain_area"/>
+			<case tag="natural" value="mountain_range"/>
+			<apply strokeWidth="1:1" color="#00663300"/>
+		</switch>
+		<switch minzoom="12"><!--ligne obligatoire pour text on path (invisible)-->
 			<case tag="natural" value="gorge"/>
+			<apply strokeWidth="1:1" color="#00663300"/>
+		</switch>
+		<switch minzoom="13"><!--ligne obligatoire pour text on path (invisible)-->
+			<case tag="natural" value="valley"/>
 			<case tag="natural" value="couloir"/>
 			<apply strokeWidth="1:1" color="#00663300"/>
 		</switch>
