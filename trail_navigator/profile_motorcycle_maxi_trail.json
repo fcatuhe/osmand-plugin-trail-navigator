@@ -37,7 +37,7 @@
   "do_not_use_animations": "false",
   "map_empty_state_allowed": "false",
   "text_scale": "1.0",
-  "map_density_n": "1.0",
+  "map_density_n": "0.5",
   "show_poi_label": "true",
   "show_mapillary": "false",
   "daynight_mode": "DAY",
