@@ -408,8 +408,8 @@
 	<!-- Order should be between 0 and 255 (integer) -->
 	<!-- output ! objectType point = 1, line = 2, polygon = 3 and order -->
 	<order>
-		<!-- Point 101-200-->
 		<switch>
+		<!-- Point 101-200-->
 			<switch area="false" point="true" objectType="1" order="128">
 				<!-- point has order 128 -->
 				<case tag="" value=""/>
@@ -456,21 +456,26 @@
 			</switch>
 
 		<!-- Polygon 1-10-->
+			<switch area="true" point="false" addPoint="true" objectType="3" order="5">
+				<case tag="leisure" value="nature_reserve" order="10"/><!--
+				<case tag="landuse" value="military" order="10"/>-->
+			</switch>
+
 			<switch cycle="true" point="false" addPoint="true" objectType="3" order="5">
 
-				<case tag="amenity" value="parking" order="9"/>
-				<case tag="amenity" value="school" order="10"/>
+				<case tag="amenity" value="parking" order="10"/>
+				<case tag="amenity" value="school" order="10"/><!---->
 				<case tag="leisure" value="nature_reserve" order="10" />
 				<case tag="leisure" value="" order="10"/>
 
-				<case tag="boundary" value="national_park" order="2" ignorePolygonArea="true"/>
-				<case tag="boundary" value="protected_area" order="1" ignorePolygonArea="true"/>
+				<case tag="boundary" value="national_park" order="2" ignorePolygonArea="true"/><!-- -->
+				<case tag="boundary" value="protected_area" order="1"  ignorePolygonArea="true"/><!---->
 				<case tag="boundary" value="forestry_compartment" order="9"/>
 
 				<case tag="place" value="region" order="1" ignorePolygonArea="true"/>
 				<case tag="place" value="island" order="1"/>
 				<case tag="place" value="islet" order="1"/>
-				<case tag="place" value="locality" order="11" ignorePolygonAsPointArea="true"/>
+				<case tag="place" value="locality" order="10" ignorePolygonAsPointArea="true"/>
 
 				<switch layer="-1" order="3">
 					<case tag="natural" value="coastline"/>
@@ -554,7 +559,7 @@
 				<case tag="landuse" value="greenfield" order="8"/>
 				<case tag="landuse" value="brownfield" order="8"/>
 				<case tag="landuse" value="reservoir" order="10"/>
-				<case tag="landuse" value="military" order="9"/>
+				<case tag="landuse" value="military" order="10"/><!--OK-->
 				<case tag="landuse" value="cemetery" order="10"/>
 				<case tag="landuse" value="construction" order="10"/>
 				<case tag="landuse" value="quarry" order="9"/>
@@ -562,7 +567,6 @@
 
 				<case tag="waterway" value="dock"/>
 				<case tag="waterway" value="riverbank" order="9"/>
-				<case tag="water" value="reservoir" order="10"/>
 				<case tag="landuse" value="basin" order="10"/>
 
 				<case tag="military" value="bunker"/>
@@ -611,14 +615,14 @@
 				<case tag="railway" value="station" ignorePolygonArea="true"/>
 				<case tag="railway" value="yard" ignorePolygonArea="true"/>
 				<case tag="addr:housenumber" value="" ignorePolygonAsPointArea="true"/>
-				<case tag="" value="" order="10"/>
+				<case tag="" value="" order="0"/>
 			</switch>
 
 		<!-- Line 11-100-->
-			<switch area="false" addPoint="true" objectType="3" order="80">
-				<case tag="boundary" value="national_park" order="0"/><!--OK --><!--
-				<case tag="region:type" value="mountain_area" ignorePolygonArea="true"/>OK pour ligne-->
-				<case tag="place" value="region" ignorePolygonArea="true"/><!--NOK -->
+			<switch area="false" addPoint="true" objectType="3" order="80"><!--
+				<case tag="boundary" value="national_park" order="0"/>
+				<case tag="region:type" value="mountain_area" ignorePolygonArea="true"/>
+				<case tag="place" value="region" ignorePolygonArea="true"/>-->
 			</switch>
 
 			<switch area="false" addPoint="false" objectType="2" >
@@ -1644,7 +1648,7 @@
 
 			<!-- Tourism and Entertainment -->
 			<switch textSize="12" nameTag="" textColor="#000000" textHaloRadius="2:2" textHaloColor="#ffffff" textWrapWidth="20" textOrder="155">
-				<case minzoom="21" tag="amenity" value="place_of_worship" nameTag="" textOrder="134"/>
+				<case minzoom="21" tag="amenity" value="place_of_worship" nameTag="name" textOrder="134"/>
 				<case minzoom="19" tag="tourism" value="artwork" nameTag="">
 					<apply_if additional="artwork_type=statue" icon="memorial_statue"/>
 				</case>
@@ -1738,7 +1742,7 @@
 			<switch textHaloRadius="1">
 				<case minzoom="15" tag="abandoned:place" value="" textOrder="226"/>
 				<case minzoom="15" tag="abandoned:landuse" value="" textOrder="227"/>
-				<case minzoom="17" textSize="12" textColor="#990d2a" textWrapWidth="20" tag="landuse" value="military" nameTag="" textOrder="245"/>
+				<case minzoom="14" textSize="12" textColor="#990d2a" textWrapWidth="20" tag="landuse" value="military" nameTag="" textOrder="145"/>
 				<case minzoom="15" textSize="12" textColor="#990d2a" textWrapWidth="20" tag="military" value="danger_area" textOrder="146"/>
 				<apply textSize="13" textColor="#656565" textHaloRadius="1:1" textHaloColor="#bbffffff"/>
 				<apply textDy="10"/>
@@ -1850,8 +1854,8 @@
 		</switch>
 
 		<switch  hideAccess="false" >
-			<switch minzoom="14" textDy="0" intersectionMargin="0.1" intersectionSizeFactor="0.1" intersectsWith="any">
-				<case tag="leisure" value="nature_reserve" nameTag="" textOrder="43"/>
+			<switch minzoom="16" ><!-- textDy="0" intersectionMargin="0.1" intersectionSizeFactor="0.1" intersectsWith="any"-->
+				<case tag="leisure" value="nature_reserve" nameTag="" textOrder="46"/>
 					<apply  textHaloColor="#99ffffff" textHaloRadius="2" textBold="true" textItalic="true" textOnPath="true" textWrapWidth="20">
 						<case maxzoom="14" textSize="12" textColor="#66cc0000"  />
 						<case maxzoom="15" textSize="13" textColor="#66cc0000"  />
@@ -1880,10 +1884,9 @@
         </switch>
 
 		<switch textColor="#2665ff" textHaloColor="#ffffff" textItalic="true" >
-			<switch minzoom="15" textOrder="42" intersectionMargin="0.1" intersectionSizeFactor="5" intersectsWith="none" textWrapWidth="10"><!-- -->
+			<switch minzoom="15" textOrder="52" textWrapWidth="17" nameTag=""><!--textMinDistance="0" intersectionMargin="0.1" intersectionSizeFactor="0.1" intersectsWith="any"-->
 				<case tag="landuse" value="reservoir" />
-				<case tag="water" value="reservoir" />
-				<case tag="natural" value="water" minzoom="16">
+				<case tag="natural" value="water" >
 					<apply_if additional="leisure=marina" minzoom="16" />
 					<apply_if additional="water=lock" minzoom="18" />
 					<apply_if additional="seamark:type=lock_basin" minzoom="18" />
@@ -1904,10 +1907,10 @@
 			</switch>
         </switch>
 
-		<switch textColor="#2665ff" textHaloColor="#ffffff" textItalic="true" textOnPath="false" textSize="11" textWrapWidth="14" ><!--intersectionMargin="5" intersectionSizeFactor="2" intersectsWith="place" -->
+		<switch textColor="#2665ff" textHaloColor="#ffffff" textItalic="true" textOnPath="false" textSize="11" textWrapWidth="14" >
 			<case minzoom="14" tag="waterway" value="river"  textOrder="50" />
 			<case minzoom="15" tag="waterway" value="dam"  textOrder="49" textOnPath="true"/>
-			<case minzoom="16" tag="waterway" value="canal" textOnPath="true" textOrder="51"/>
+			<case minzoom="15" tag="waterway" value="canal" textOnPath="true" textOrder="51" textMinDistance="150" />
 			<case minzoom="16" tag="waterway" value="waterfall" additional="osmand_remarkable_waterfall=yes" nameTag2="height"  textOnPath="true" textOrder="217"/>
 			<case minzoom="18" tag="waterway" value="stream" textOnPath="true" textOrder="206"/><!--  -->
 			<case minzoom="18" tag="landuse" value="basin"  textOrder="218"/>
@@ -2204,7 +2207,6 @@
 				<case tag="natural" value="water"/>
 				<case tag="landuse" value="reservoir"/>
 				<apply icon="osmc_white_dot" shield=""/>
-				<apply_if lessDetailed="true" textLength="0" icon=""/>
 				<apply_if textLength="0" icon=""/>
 			</switch>
 			<switch minzoom="12" iconVisibleSize="28">
@@ -3039,14 +3041,12 @@
 		<switch color="#7ad1ed">
 			<switch>
 				<case minzoom="1" tag="natural" value="coastline"/>
-				<switch>
-					<case minzoom="4" tag="natural" value="water"/>
-					<case minzoom="12" tag="waterway" value="riverbank"/>
-					<case minzoom="10" tag="landuse" value="reservoir"/>
-					<case minzoom="14" tag="landuse" value="basin"/>
-					<case minzoom="10" tag="landuse" value="salt_pond"/>
-					<apply color_2="#90c0ff" strokeWidth_2="1:1"/>
-				</switch>
+				<case minzoom="10" tag="natural" value="water"/>
+				<case minzoom="10" tag="landuse" value="reservoir"/>
+				<case minzoom="10" tag="landuse" value="salt_pond"/>
+				<case minzoom="12" tag="waterway" value="riverbank"/>
+				<case minzoom="14" tag="landuse" value="basin"/>
+				<apply color_2="#90c0ff" strokeWidth_2="1:1"/>
 			</switch>
 			<switch>
 				<case minzoom="15" tag="leisure" value="swimming_pool"/>
@@ -3059,7 +3059,7 @@
 				<case minzoom="16" tag="natural" value="geyser"/>
 				<apply color_2="#7479ec" strokeWidth_2="1.3:1"/>
 			</switch>
-			<case minzoom="10" tag="waterway" value="dock" color_2="#aa8387d5" strokeWidth_2="3:1"/><!--
+			<case minzoom="14" tag="waterway" value="dock" color_2="#aa8387d5" strokeWidth_2="3:1"/><!--
 			<apply color="#7ad1ed"/>
 			<apply_if additional="intermittent=yes" strokeWidth_2="1:1" color_2="#7479ec" pathEffect_2="7_5"/>-->
 			<apply_if nightMode="true" color="#114477" strokeWidth_2="0"/>
@@ -3087,7 +3087,7 @@
 		<!-- nature_reserve-->
 		<switch hideAccess="false">
 			<case tag="leisure" value="nature_reserve" />
-			<apply minzoom="8" color_2="#88ffcccc" strokeWidth_2="1" color="#ffe9d9">
+			<apply minzoom="8" color_2="#88ffcccc" strokeWidth_2="1" color="#ffd0d0">
 				<case maxzoom="9" color_2="#77ff9999" strokeWidth_2="1:1"/>
 				<case maxzoom="10" color_2="#66ff7575" strokeWidth_2="1.5:1"/>
 				<case maxzoom="11" color_2="#55ff6666" strokeWidth_2="2:1"/>
