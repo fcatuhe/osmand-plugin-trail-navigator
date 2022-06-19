@@ -3567,8 +3567,8 @@
 					<case additional="smoothness=very_horrible"/>
 					<case additional="smoothness=horrible" />
 					<case additional="tracktype=grade5" />
-						<apply minzoom="14" >
-							<case maxzoom="13" strokeWidth_5="0" color_5="#5ca300" pathEffect_5="14_3"/>
+						<apply minzoom="13" >
+							<case maxzoom="13" strokeWidth_5="1.5" color_5="#5ca300" pathEffect_5="10_4"/>
 							<case maxzoom="14" strokeWidth_5="2:0.7" color_5="#60a600" pathEffect_5="15_4"/>
 							<case maxzoom="15" strokeWidth_5="1.8:1.2" color_5="#63a900" pathEffect_5="16_5"/>
 							<case maxzoom="16" strokeWidth_5="1.8:1.8" color_5="#63a900" pathEffect_5="17_6"/>
@@ -3589,12 +3589,12 @@
 				<!-- medium -->
 				<switch >
 					<case additional="mtb:scale=0" />
-					<case additional="mtb:scale=1" /><!--
+					<case additional="mtb:scale=1" />
 					<case additional="surface=unpaved" />
 					<case additional="surface=ground" />
 					<case additional="surface=dirt" />
-					<case additional="surface=earth" />-->
-					<case additional="smoothness=very_bad" />
+					<case additional="surface=earth" /><!--
+					<case additional="smoothness=very_bad" />-->
 					<case additional="tracktype=grade4" />
 					<apply minzoom="13"  >
 						<case maxzoom="12" strokeWidth_5="0" />
@@ -3620,6 +3620,7 @@
 				<!-- carrossable -->
 				<switch >
 					<case additional="surface=pebblestone" />
+					<case additional="smoothness=very_bad" />
 					<case additional="tracktype=grade3" />
 					<apply minzoom="12" color_5="$trackColor" >
 						<case maxzoom="11" strokeWidth_5="0" />
@@ -3685,7 +3686,7 @@
 					</apply_if>
 				</switch>
 
-				<!-- sans revetement après les tracktypes pour trier mauvais tags :grade2 et ground par exemple -->
+				<!-- sans revetement après les tracktypes pour trier mauvais tags :grade2 et ground par exemple
 				<switch >
 					<case additional="surface=unpaved" />
 					<case additional="surface=ground" />
@@ -3710,7 +3711,7 @@
 						<case minzoom="18" strokeWidth_5="2.6:2.6" pathEffect_5="13_9"/>
 						<apply_if nightMode="true" color_5="#444400"/>
 					</apply_if>
-				</switch>
+				</switch>-->
 
 				<!-- sans info idem hard + pointillés si option active -->
 				<switch >
@@ -4288,16 +4289,16 @@
 
 		<!-- contour elevation nightMode="false"-->
 		<switch  tag="contour" value="elevation">
-			<case minzoom="11" contourLines="12"/>
-			<case minzoom="12" contourLines="13"/>
-			<case minzoom="12" contourLines=""/>
-			<case minzoom="13" contourLines="14"/>
-			<case minzoom="14" contourLines="15"/>
+			<case minzoom="12" contourLines="12"/>
+			<case minzoom="13" contourLines="13"/>
+			<case minzoom="13" contourLines=""/>
+			<case minzoom="14" contourLines="14"/>
+			<case minzoom="15" contourLines="15"/>
 			<apply_if contourLines="12">
 				<switch lessDetailed="false" >
-					<case minzoom="13" additional="contourtype=10m" color="$contourLineColor"/>
+					<case minzoom="12" additional="contourtype=10m" color="$contourLineColor"/>
 					<case minzoom="12" additional="contourtype=20m" color="$contourLineColor"/>
-					<case minzoom="13" additional="contourtype=50m" color="$contourLineColor50"/>
+					<case minzoom="12" additional="contourtype=50m" color="$contourLineColor50"/>
 					<case minzoom="12" additional="contourtype=100m" color="$contourLineColor100"/>
 				</switch>
 				<switch lessDetailed="true" nightMode="true">
@@ -4309,12 +4310,12 @@
 			</apply_if>
 			<apply_if contourLines="13">
 				<switch lessDetailed="false" >
-					<case minzoom="14" additional="contourtype=10m" color="$contourLineColor"/>
+					<case minzoom="13" additional="contourtype=10m" color="$contourLineColor"/>
 					<case minzoom="13" additional="contourtype=20m" color="$contourLineColor"/>
-					<case minzoom="14" additional="contourtype=50m" color="$contourLineColor50"/>
+					<case minzoom="13" additional="contourtype=50m" color="$contourLineColor50"/>
 					<case minzoom="13" additional="contourtype=100m" color="$contourLineColor100"/>
 				</switch>
-				<switch lessDetailed="true" >
+				<switch lessDetailed="true" nightMode="true">
 					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
 					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
 					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
@@ -4323,12 +4324,12 @@
 			</apply_if>
 			<apply_if contourLines="">
 				<switch lessDetailed="false" >
-					<case minzoom="14" additional="contourtype=10m" color="$contourLineColor"/>
+					<case minzoom="13" additional="contourtype=10m" color="$contourLineColor"/>
 					<case minzoom="13" additional="contourtype=20m" color="$contourLineColor"/>
-					<case minzoom="14" additional="contourtype=50m" color="$contourLineColor50"/>
+					<case minzoom="13" additional="contourtype=50m" color="$contourLineColor50"/>
 					<case minzoom="13" additional="contourtype=100m" color="$contourLineColor100"/>
 				</switch>
-				<switch lessDetailed="true" >
+				<switch lessDetailed="true" nightMode="true" >
 					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
 					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
 					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
@@ -4337,12 +4338,12 @@
 			</apply_if>
 			<apply_if contourLines="14">
 				<switch lessDetailed="false" >
-					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
+					<case minzoom="14" additional="contourtype=10m" color="$contourLineColor"/>
 					<case minzoom="14" additional="contourtype=20m" color="$contourLineColor"/>
-					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
+					<case minzoom="14" additional="contourtype=50m" color="$contourLineColor50"/>
 					<case minzoom="14" additional="contourtype=100m" color="$contourLineColor100"/>
 				</switch>
-				<switch lessDetailed="true" >
+				<switch lessDetailed="true"  nightMode="true">
 					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
 					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
 					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
@@ -4351,12 +4352,12 @@
 			</apply_if>
 			<apply_if contourLines="15">
 				<switch lessDetailed="false" >
-					<case minzoom="16" additional="contourtype=10m" color="$contourLineColor"/>
+					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
 					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
-					<case minzoom="16" additional="contourtype=50m" color="$contourLineColor50"/>
+					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
 					<case minzoom="15" additional="contourtype=100m" color="$contourLineColor100"/>
 				</switch>
-				<switch lessDetailed="true" >
+				<switch lessDetailed="true"  nightMode="true">
 					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
 					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
 					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
