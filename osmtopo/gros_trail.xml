@@ -22,7 +22,7 @@
 	<!-- recalculate smart using old route within N-meters (0 recalculate fresh, default 10km)  -->
 	<attribute name="recalculateDistanceHelp" value="100000" />
 
-	<routingProfile name="gros_trail" baseProfile="car" restrictionsAware="true" minSpeed="10" defaultSpeed="50.0" maxSpeed="120.0" sharpTurn="" slightTurn="" roundaboutTurn="" followSpeedLimitations="false" onewayAware="true">
+	<routingProfile name="gros_trail" baseProfile="car" restrictionsAware="true" minSpeed="1" defaultSpeed="30.0" maxSpeed="90.0" sharpTurn="" slightTurn="" roundaboutTurn="" followSpeedLimitations="false" onewayAware="true">
 
 		<parameter id="avoid_track" name="pas de chemins" description="?vite les chemins" type="boolean" default="false"/>
 		<parameter id="avoid_interdit" name="pas d'interdiction" description="passe sur l'interdit" type="boolean" default="false"/>
@@ -190,7 +190,8 @@
 		</way>
 
 		<way attribute="speed" type="speed">
-			<select value="50" />
+			<select value="30" t="highway" v="track" />		<!-- vitesse moyenne chemin-->
+			<select value="50" t="highway" v="" />		<!-- vitesse moyenne toutes routes-->
 		</way>
 
 		<way attribute="priority">

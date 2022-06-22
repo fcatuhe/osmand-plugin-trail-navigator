@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<osmand_routing_config defaultProfile="car" name="petit_trail2">
+<osmand_routing_config defaultProfile="car" name="petit_trail">
 	<!-- 1. parameters of routing and different tweaks Influence on A* : -->
 	<!-- f(x) + heuristicCoefficient*g(X) -->
 	<attribute name="heuristicCoefficient" value="7.0" /><!--3.4 bon compromis pour longue distance avec beaucoup de chemins
@@ -178,7 +178,8 @@
 		</way>
 
 		<way attribute="speed" type="speed">
-			<select value="50" />
+			<select value="20" t="highway" v="track" />		<!-- vitesse moyenne chemin-->
+			<select value="55" t="highway" v="" />		<!-- vitesse moyenne toutes routes-->
 		</way>
 
 		<way attribute="priority">
@@ -231,27 +232,27 @@
 			</if>
 
 			<select value="2" t="ford" v="yes"/>
-			<select value="1" t="surface" v="mud"/>
-			<select value="1" t="surface" v="grass"/>
-			<select value="1" t="surface" v="sand"/>
-			<select value="1" t="surface" v="dirt"/>
-			<select value="1" t="surface" v="earth"/>
-			<select value="1" t="surface" v="unpaved"/>
-			<select value="1" t="surface" v="ground"/>
-			<select value="1" t="tracktype" v="grade5"/>
-			<select value="2.6" t="tracktype" v="grade4"/>
-			<select value="2.7" t="surface" v="compacted"/>
-			<select value="2.7" t="surface" v="gravel"/>
-			<select value="2.7" t="surface" v="pebblestone"/>
-			<select value="2.8" t="surface" v="paved"/>
-			<select value="2.8" t="surface" v="paving_stones"/>
-			<select value="2.8" t="tracktype" v="grade3"/>
-			<select value="2.9" t="surface" v="fine_gravel"/>
-			<select value="2.9" t="surface" v="asphalt"/>
-			<select value="2.9" t="surface" v="concrete"/>
-			<select value="2.9" t="tracktype" v="grade2"/>
-			<select value="3" t="tracktype" v="grade1"/>
-			<select value="1" t="highway" v="track"/><!--chemins non taggés-->
+			<select value="2" t="surface" v="mud"/>
+			<select value="2" t="surface" v="grass"/>
+			<select value="2" t="surface" v="sand"/>
+			<select value="2" t="surface" v="dirt"/>
+			<select value="2" t="surface" v="earth"/>
+			<select value="2" t="surface" v="unpaved"/>
+			<select value="2" t="surface" v="ground"/>
+			<select value="2" t="tracktype" v="grade5"/>
+			<select value="2" t="tracktype" v="grade4"/>
+			<select value="2" t="surface" v="compacted"/>
+			<select value="2" t="surface" v="gravel"/>
+			<select value="2" t="surface" v="pebblestone"/>
+			<select value="2" t="surface" v="paved"/>
+			<select value="2" t="surface" v="paving_stones"/>
+			<select value="2" t="tracktype" v="grade3"/>
+			<select value="2" t="surface" v="fine_gravel"/>
+			<select value="2" t="surface" v="asphalt"/>
+			<select value="2" t="surface" v="concrete"/>
+			<select value="2" t="tracktype" v="grade2"/>
+			<select value="2" t="tracktype" v="grade1"/>
+			<select value="2" t="highway" v="track"/><!--chemins non taggés-->
 
 			<select value="0"/>
 		</way>
@@ -299,17 +300,6 @@
 		</point>
 
 		<way attribute="penalty_transition">
-			<select value="100" t="surface" v="mud"/>
-			<select value="100" t="surface" v="sand"/>
-			<select value="50" t="ford" v="yes"/>
-			<select value="50" t="surface" v="grass"/>
-			<select value="0" t="highway" v="track"/>
-
-			<select value="0" t="route_hiking"/><!--test -->
-			<select value="0" t="route_mtb"/><!-- test -->
-			<!-- give highway penalty to use mostly footways if available-->
-			<select value="100"/>
-
 		</way>
 
 	</routingProfile>
