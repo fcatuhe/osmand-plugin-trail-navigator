@@ -178,8 +178,8 @@
 		</way>
 
 		<way attribute="speed" type="speed">
-			<select value="20" t="highway" v="track" />		<!-- vitesse moyenne chemin-->
-			<select value="55" t="highway" v="" />		<!-- vitesse moyenne toutes routes-->
+			<select value="20" t="highway" v="track" />		<!-- vitesse moyenne chemin-->	
+			<select value="55" t="highway" v="" />		<!-- vitesse moyenne toutes routes-->	
 		</way>
 
 		<way attribute="priority">
