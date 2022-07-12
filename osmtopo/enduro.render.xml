@@ -261,11 +261,11 @@
 		<case tag="highway" value="secondary_link" attrColorValue="#000000" attrStringValue="highway_class_road"/>
 		<case tag="highway" value="tertiary" attrColorValue="#000000" attrStringValue="highway_class_road"/>
 		<case tag="highway" value="tertiary_link" attrColorValue="#000000" attrStringValue="highway_class_road"/>
-		<case tag="highway" value="unclassified" attrColorValue="#000000" attrStringValue="highway_class_road"/>
-		<case tag="highway" value="road" attrColorValue="#000000" attrStringValue="highway_class_road"/>
-		<case tag="highway" value="residential" attrColorValue="#000000" attrStringValue="highway_class_road"/>
-		<case tag="highway" value="living_street" attrColorValue="#000000" attrStringValue="highway_class_road"/>
-		<case tag="highway" value="service" attrColorValue="$trackColor" attrStringValue="chemin"/>
+		<case tag="highway" value="unclassified" attrColorValue="#000000" attrStringValue="petites _routes"/>
+		<case tag="highway" value="road" attrColorValue="#000000" attrStringValue="petites _routes"/>
+		<case tag="highway" value="residential" attrColorValue="#000000" attrStringValue="rues"/>
+		<case tag="highway" value="living_street" attrColorValue="#000000" attrStringValue="rues"/>
+		<case tag="highway" value="service" attrColorValue="$trackColor" attrStringValue="service"/>
 		<case tag="highway" value="track" attrColorValue="$trackColor" attrStringValue="chemin"/>
 		<case tag="highway" value="path" attrColorValue="#ff0000" attrStringValue="sentier"/>
 		<case tag="highway" value="pedestrian" attrColorValue="#ff0000" attrStringValue="highway_class_footway"/>
@@ -307,6 +307,8 @@
 		<case additional="surface=dirt" attrColorValue="$trackColor_2" attrStringValue="surface_ground"/>
 		<case additional="surface=ground" attrColorValue="$trackColor_2" attrStringValue="surface_ground"/>
 		<case additional="surface=undefined" attrColorValue="$trackColor_2" attrStringValue="surface_ground"/>   
+		<case additional="tracktype=grade4" attrColorValue="$trackColor_2" attrStringValue="surface_ground"/>
+		<case additional="tracktype=grade5" attrColorValue="$trackColor_2" attrStringValue="surface_ground"/>
 		<case additional="surface=sand" attrColorValue="$trackColor_2" attrStringValue="surface_sand"/>
 		<case additional="surface=grass" attrColorValue="$trackColor_2" attrStringValue="surface_grass"/>
 		<case additional="surface=mud" attrColorValue="#$trackColor_2" attrStringValue="surface_mud"/>
@@ -315,6 +317,7 @@
 		<case additional="surface=snow" attrColorValue="$trackColor_2" attrStringValue="surface_snow"/>
 
 		<case additional="surface=paved" attrColorValue="$trackColor" attrStringValue="surface_paved"/>
+		<case additional="tracktype=grade1" attrColorValue="$trackColor" attrStringValue="surface_paved"/>
 		<case additional="surface=concrete" attrColorValue="$trackColor" attrStringValue="surface_concrete"/>
 		<case additional="surface=sett" attrColorValue="$trackColor" attrStringValue="surface_sett"/>
 		<case additional="surface=cobblestone" attrColorValue="$trackColor" attrStringValue="surface_cobblestone"/>
@@ -322,6 +325,8 @@
 		<case additional="surface=pebblestone" attrColorValue="$trackColor" attrStringValue="surface_pebblestone"/>
 		<case additional="surface=stone" attrColorValue="$trackColor" attrStringValue="surface_stone"/>
 		<case additional="surface=gravel" attrColorValue="$trackColor" attrStringValue="surface_gravel"/>
+		<case additional="tracktype=grade2" attrColorValue="$trackColor" attrStringValue="surface_gravel"/> 
+		<case additional="tracktype=grade3" attrColorValue="$trackColor" attrStringValue="surface_gravel"/>
 		<case additional="surface=fine_gravel" attrColorValue="$trackColor" attrStringValue="surface_fine_gravel"/>
 		<case additional="surface=compacted" attrColorValue="$trackColor" attrStringValue="surface_compacted"/>
 		<case tag="highway" value="service" attrColorValue="$trackColor" attrStringValue="surface_compacted"/>
@@ -529,12 +534,13 @@
 				<case tag="natural" value="volcano">
 					<apply_if maxzoom="12" additional="volcano:type=mud" order="-1"/>
 				</case>
-				<!--interdit le texte on path !
-				<case tag="region:type" value="mountain_area" ignorePolygonArea="true"/>
+				<!--interdit le texte on path !-->
+				<case tag="region:type" value="mountain_area" ignorePolygonArea="true"/><!--
 				<case tag="natural" value="valley" ignorePolygonArea="true"/>
 				<case tag="natural" value="gorge" ignorePolygonArea="true"/>
 				<case tag="natural" value="mountain_area" ignorePolygonArea="true"/>
-				<case tag="natural" value="mountain_range" ignorePolygonArea="true"/>-->
+				<case tag="natural" value="mountain_range" ignorePolygonArea="true"/>
+				<case tag="natural" value="massif" ignorePolygonArea="true"/>-->
 				<case tag="natural" value="water" order="10"/>
 				<case tag="natural" value="sinkhole"/>
 				<case tag="natural" value="hot_spring"/>
@@ -4288,76 +4294,46 @@
 		</switch>
 			
 		<!-- contour elevation nightMode="false"-->		
-		<switch  tag="contour" value="elevation">
+		<switch lessDetailed="false" nightMode="false"  tag="contour" value="elevation">
 			<case minzoom="12" contourLines="12"/>
 			<case minzoom="13" contourLines="13"/>
 			<case minzoom="13" contourLines=""/>
 			<case minzoom="14" contourLines="14"/>
 			<case minzoom="15" contourLines="15"/>
 			<apply_if contourLines="12">
-				<switch lessDetailed="false" >
+				<switch  >
 					<case minzoom="12" additional="contourtype=10m" color="$contourLineColor"/>
 					<case minzoom="12" additional="contourtype=20m" color="$contourLineColor"/>
 					<case minzoom="12" additional="contourtype=50m" color="$contourLineColor50"/>
 					<case minzoom="12" additional="contourtype=100m" color="$contourLineColor100"/>
 				</switch>
-				<switch lessDetailed="true" nightMode="true">
-					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
-					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
-					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
-					<case minzoom="15" additional="contourtype=100m" color="$contourLineColor100"/>
-				</switch>
 			</apply_if>	
 			<apply_if contourLines="13">
-				<switch lessDetailed="false" >
+				<switch  >
 					<case minzoom="13" additional="contourtype=10m" color="$contourLineColor"/>
 					<case minzoom="13" additional="contourtype=20m" color="$contourLineColor"/>
 					<case minzoom="13" additional="contourtype=50m" color="$contourLineColor50"/>
 					<case minzoom="13" additional="contourtype=100m" color="$contourLineColor100"/>
-				</switch>
-				<switch lessDetailed="true" nightMode="true">
-					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
-					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
-					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
-					<case minzoom="15" additional="contourtype=100m" color="$contourLineColor100"/>
 				</switch>
 			</apply_if>	
 			<apply_if contourLines="">
-				<switch lessDetailed="false" >
+				<switch  >
 					<case minzoom="13" additional="contourtype=10m" color="$contourLineColor"/>
 					<case minzoom="13" additional="contourtype=20m" color="$contourLineColor"/>
 					<case minzoom="13" additional="contourtype=50m" color="$contourLineColor50"/>
 					<case minzoom="13" additional="contourtype=100m" color="$contourLineColor100"/>
 				</switch>
-				<switch lessDetailed="true" nightMode="true" >
-					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
-					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
-					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
-					<case minzoom="15" additional="contourtype=100m" color="$contourLineColor100"/>
-				</switch>
 			</apply_if>	
 			<apply_if contourLines="14">
-				<switch lessDetailed="false" >
+				<switch >
 					<case minzoom="14" additional="contourtype=10m" color="$contourLineColor"/>
 					<case minzoom="14" additional="contourtype=20m" color="$contourLineColor"/>
 					<case minzoom="14" additional="contourtype=50m" color="$contourLineColor50"/>
 					<case minzoom="14" additional="contourtype=100m" color="$contourLineColor100"/>
 				</switch>
-				<switch lessDetailed="true"  nightMode="true">
-					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
-					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
-					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
-					<case minzoom="15" additional="contourtype=100m" color="$contourLineColor100"/>
-				</switch>
 			</apply_if>	
 			<apply_if contourLines="15">
-				<switch lessDetailed="false" >
-					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
-					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
-					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
-					<case minzoom="15" additional="contourtype=100m" color="$contourLineColor100"/>
-				</switch>
-				<switch lessDetailed="true"  nightMode="true">
+				<switch  >
 					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
 					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
 					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
@@ -4456,8 +4432,91 @@
 					<case minzoom=" 15" strokeWidth="1.4"/>-->
 				</case>
 				<case strokeWidth="0.6"/>
+			</apply_if>		
+		</switch>
+		<!-- contour elevation nightMode="true"-->		
+		<switch   tag="contour" value="elevation">
+			<case minzoom="12" contourLines="12"/>
+			<case minzoom="13" contourLines="13"/>
+			<case minzoom="13" contourLines=""/>
+			<case minzoom="14" contourLines="14"/>
+			<case minzoom="15" contourLines="15"/>
+			<apply_if contourLines="12">
+				<switch >
+					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
+					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
+					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
+					<case minzoom="15" additional="contourtype=100m" color="$contourLineColor100"/>
+				</switch>
+			</apply_if>	
+			<apply_if contourLines="13">
+				<switch >
+					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
+					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
+					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
+					<case minzoom="15" additional="contourtype=100m" color="$contourLineColor100"/>
+				</switch>
+			</apply_if>	
+			<apply_if contourLines="">
+				<switch >
+					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
+					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
+					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
+					<case minzoom="15" additional="contourtype=100m" color="$contourLineColor100"/>
+				</switch>
+			</apply_if>	
+			<apply_if contourLines="14">
+				<switch >
+					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
+					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
+					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
+					<case minzoom="15" additional="contourtype=100m" color="$contourLineColor100"/>
+				</switch>
+			</apply_if>	
+			<apply_if contourLines="15">
+				<switch >
+					<case minzoom="15" additional="contourtype=10m" color="$contourLineColor"/>
+					<case minzoom="15" additional="contourtype=20m" color="$contourLineColor"/>
+					<case minzoom="15" additional="contourtype=50m" color="$contourLineColor50"/>
+					<case minzoom="15" additional="contourtype=100m" color="$contourLineColor100"/>
+				</switch>
+			</apply_if>	
+			<apply_if additional="contourtype=100m" >
+				<case contourWidth="thin" strokeWidth="1.3:1">
+				</case>
+				<case contourWidth="medium" strokeWidth="1.4:1">
+				</case>
+				<case contourWidth="thick" strokeWidth="1.5:1">
+				</case>
+				<case strokeWidth="1.3"/>
 			</apply_if>
-		
+			<apply_if additional="contourtype=10m" >
+				<case contourWidth="thin" strokeWidth="0.6:1">
+				</case>
+				<case contourWidth="medium" strokeWidth="0.7:1">
+				</case>
+				<case contourWidth="thick" strokeWidth="0.8:1">
+				</case>
+				<case strokeWidth="0.6"/>
+			</apply_if>
+			<apply_if additional="contourtype=20m" >
+				<case contourWidth="thin" strokeWidth="0.6:1">
+				</case>
+				<case contourWidth="medium" strokeWidth="0.7:1">
+				</case>
+				<case contourWidth="thick" strokeWidth="0.8:1">
+				</case>
+				<case strokeWidth="0.6"/>
+			</apply_if>
+			<apply_if additional="contourtype=50m" >
+				<case contourWidth="thin" strokeWidth="0.9:1">
+				</case>
+				<case contourWidth="medium" strokeWidth="1.0:1">
+				</case>
+				<case contourWidth="thick" strokeWidth="1.1:1">
+				</case>
+				<case strokeWidth="0.6"/>
+			</apply_if>		
 		</switch>
 
 		<!-- cliff, ridge etc -->
